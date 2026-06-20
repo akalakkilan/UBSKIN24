@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank Soal CBT Dermatologi & Venereologi</title>
+<style>
+:root{
+--bg:#0f172a;--panel:#ffffff;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;
+--brand:#4f46e5;--brand2:#6366f1;--brand-soft:#eef2ff;
+--green:#16a34a;--green-soft:#dcfce7;--orange:#f59e0b;--orange-soft:#fef3c7;
+--gray:#cbd5e1;--gray-soft:#f1f5f9;--red:#dc2626;--red-soft:#fee2e2;
+--shadow:0 10px 30px rgba(15,23,42,.08);--radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+background:linear-gradient(180deg,#1e1b4b 0%,#0f172a 100%);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.55}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+
+/* ===== START SCREEN ===== */
+.hero{background:var(--panel);border-radius:24px;box-shadow:var(--shadow);padding:40px;margin-top:30px}
+.hero h1{font-size:30px;margin:0 0 6px;letter-spacing:-.5px}
+.hero .sub{color:var(--muted);font-size:15px;margin-bottom:24px}
+.badge-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.stat{background:var(--brand-soft);border:1px solid #e0e7ff;border-radius:14px;padding:14px 18px;min-width:120px}
+.stat b{display:block;font-size:24px;color:var(--brand)}
+.stat span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.opt-card{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.opt-card .t{font-weight:600;font-size:15px}
+.opt-card .d{font-size:13px;color:var(--muted)}
+.switch{position:relative;width:52px;height:30px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:var(--gray);border-radius:30px;transition:.25s}
+.slider:before{content:'';position:absolute;height:22px;width:22px;left:4px;top:4px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.switch input:checked+.slider{background:var(--brand)}
+.switch input:checked+.slider:before{transform:translateX(22px)}
+.timer-input{width:90px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font-size:15px;text-align:center}
+.btn{background:var(--brand);color:#fff;padding:14px 28px;border-radius:12px;font-size:16px;font-weight:700;transition:.2s;box-shadow:0 6px 16px rgba(79,70,229,.3)}
+.btn:hover{background:#4338ca;transform:translateY(-1px)}
+.btn-lg{width:100%;margin-top:14px}
+.btn-ghost{background:#fff;color:var(--brand);border:1px solid var(--line);box-shadow:none}
+.btn-ghost:hover{background:var(--gray-soft);transform:none}
+.btn-danger{background:var(--red);box-shadow:0 6px 16px rgba(220,38,38,.25)}
+.btn-danger:hover{background:#b91c1c}
+.note{font-size:12.5px;color:var(--muted);background:var(--gray-soft);border-radius:12px;padding:14px 16px;margin-top:18px}
+
+/* ===== EXAM LAYOUT ===== */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-radius:0 0 16px 16px}
+.topbar .title{font-weight:800;font-size:15px;color:var(--ink)}
+.topbar .title small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.timer{display:flex;align-items:center;gap:10px}
+.timer .clock{font-variant-numeric:tabular-nums;font-weight:800;font-size:22px;background:var(--ink);color:#fff;padding:6px 14px;border-radius:10px;letter-spacing:1px}
+.timer .clock.warn{background:var(--orange)}
+.timer .clock.danger{background:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.timer .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;text-align:right}
+.grid{display:grid;grid-template-columns:1fr 300px;gap:20px;margin-top:20px;align-items:start}
+.card{background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 30px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.qnum{background:var(--brand);color:#fff;font-weight:800;border-radius:10px;padding:6px 12px;font-size:14px}
+.chip{background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:700;padding:5px 11px;border-radius:20px}
+.chip.skdi{background:#ecfeff;color:#0891b2}
+.chip.src{background:#eef2ff;color:#4338ca}
+.kbdhint{font-size:11.5px;line-height:1.5;color:#64748b;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:10px 0}
+.kbdhint b{display:inline-block;min-width:16px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:5px;padding:0 5px;color:#334155;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.qstem{font-size:16.5px;line-height:1.7;margin:6px 0 22px;color:#0f172a}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{display:flex;align-items:flex-start;gap:14px;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;transition:.15s;text-align:left;width:100%;background:#fff}
+.option:hover{border-color:var(--brand2);background:var(--brand-soft)}
+.option .key{flex:none;width:30px;height:30px;border-radius:8px;background:var(--gray-soft);color:var(--ink);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s}
+.option .txt{font-size:15px;padding-top:3px}
+.option.sel{border-color:var(--brand);background:var(--brand-soft)}
+.option.sel .key{background:var(--brand);color:#fff}
+.option.correct{border-color:var(--green);background:var(--green-soft)}
+.option.correct .key{background:var(--green);color:#fff}
+.option.wrong{border-color:var(--red);background:var(--red-soft)}
+.option.wrong .key{background:var(--red);color:#fff}
+.option[disabled]{cursor:default}
+.actionrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.nav-btns{display:flex;gap:10px}
+.flagbtn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--orange);color:#b45309;background:#fff;padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px}
+.flagbtn.on{background:var(--orange);color:#fff}
+.smallbtn{padding:10px 18px;border-radius:10px;font-weight:700;font-size:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.smallbtn:hover{background:var(--gray-soft)}
+.smallbtn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+.smallbtn.primary:hover{background:#4338ca}
+
+/* ===== EXPLANATION ===== */
+.explain{margin-top:22px;border-top:1px dashed var(--line);padding-top:20px}
+.explain h4{margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:.5px;color:var(--brand)}
+.keyline{background:var(--green-soft);border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;font-size:14.5px;margin-bottom:10px}
+.keyline b{color:var(--green)}
+.explain .body{font-size:14.5px;line-height:1.7;color:#334155}
+
+/* ===== SIDEBAR NAV ===== */
+.side{background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;position:sticky;top:78px}
+.side h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:14px;font-size:11.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:4px;display:inline-block}
+.dot.g{background:var(--green)}.dot.o{background:var(--orange)}.dot.a{background:var(--gray)}.dot.c{background:var(--brand)}
+.navgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;max-height:330px;overflow:auto;padding-right:4px}
+.navcell{aspect-ratio:1;border-radius:8px;background:var(--gray-soft);color:var(--ink);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid transparent;transition:.12s}
+.navcell:hover{transform:scale(1.08)}
+.navcell.answered{background:var(--green-soft);color:var(--green)}
+.navcell.flagged{background:var(--orange-soft);color:#b45309}
+.navcell.flagged.answered{background:var(--orange-soft);color:#b45309}
+.navcell.flagged:after{content:'';position:absolute}
+.navcell.current{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand-soft)}
+.navcell.flag-mark{position:relative}
+.navcell.flag-mark:before{content:'';position:absolute;top:2px;right:2px;width:7px;height:7px;border-radius:50%;background:var(--orange)}
+.side .summary{margin-top:14px;font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.side .summary b{color:var(--ink)}
+.stopbtn{width:100%;margin-top:14px}
+
+/* ===== RESULT ===== */
+.result-hero{background:var(--panel);border-radius:24px;box-shadow:var(--shadow);padding:40px;text-align:center;margin-top:24px}
+.score-ring{width:170px;height:170px;border-radius:50%;margin:10px auto 18px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff}
+.score-ring b{font-size:42px;line-height:1}
+.score-ring span{font-size:13px;opacity:.9}
+.result-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin:18px 0}
+.rstat{background:var(--gray-soft);border-radius:14px;padding:14px 22px;min-width:110px}
+.rstat b{display:block;font-size:24px}
+.rstat span{font-size:12px;color:var(--muted)}
+.topic-table{max-width:560px;margin:20px auto 0;text-align:left}
+.topic-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+.topic-row .bar{flex:1;height:8px;background:var(--gray-soft);border-radius:6px;overflow:hidden}
+.topic-row .bar i{display:block;height:100%;background:var(--brand)}
+.topic-row .pct{width:84px;text-align:right;color:var(--muted);font-size:12.5px}
+.result-actions{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:13.5px;z-index:60;transition:.3s;box-shadow:var(--shadow)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.mobnav-toggle{display:none}
+
+/* ===== TABLET ===== */
+@media(max-width:880px){
+.wrap{padding:14px}
+.grid{grid-template-columns:1fr;gap:14px;margin-top:14px}
+.side{position:static;order:-1;padding:14px}
+.navgrid{grid-template-columns:repeat(10,1fr);max-height:none;gap:6px}
+.hero,.card{padding:22px}
+.card{padding:20px 18px}
+.qstem{font-size:15.5px}
+.hero h1{font-size:25px}
+}
+
+/* ===== PHONE ===== */
+@media(max-width:560px){
+.wrap{padding:10px}
+.topbar{padding:9px 12px;gap:8px;border-radius:0 0 12px 12px}
+.topbar .title{font-size:12.5px}
+.topbar .title small{font-size:10px}
+.timer .clock{font-size:17px;padding:5px 10px;letter-spacing:.5px}
+.timer .lbl{display:none}
+.grid{gap:12px;margin-top:12px}
+.card{padding:16px 14px;border-radius:14px}
+.side{padding:12px}
+.qhead{gap:7px;margin-bottom:11px}
+.qnum{font-size:12.5px;padding:5px 10px}
+.chip{font-size:11px;padding:4px 9px}
+.qstem{font-size:14.5px;line-height:1.6;margin:4px 0 16px}
+.options{gap:9px}
+.option{padding:11px 12px;gap:10px;border-radius:12px}
+.option .key{width:26px;height:26px;font-size:13px}
+.option .txt{font-size:14px;padding-top:2px}
+.kbdhint{display:none}
+.actionrow{gap:9px;margin-top:18px}
+.nav-btns{width:100%;gap:8px}
+.nav-btns .smallbtn{flex:1}
+.smallbtn,.flagbtn{padding:11px 12px;font-size:13.5px}
+.flagbtn{width:100%;justify-content:center}
+.navgrid{grid-template-columns:repeat(8,1fr);gap:6px}
+.navcell{font-size:12px;border-radius:7px}
+.legend{font-size:11px;gap:6px 10px}
+.explain{margin-top:18px;padding-top:16px}
+.keyline{font-size:13.5px;padding:10px 12px}
+.explain .body{font-size:13.5px}
+.hero{padding:24px 18px;margin-top:16px;border-radius:18px}
+.hero h1{font-size:22px}
+.hero .sub{font-size:13.5px}
+.stat{min-width:0;flex:1 1 calc(50% - 12px);padding:12px 14px}
+.stat b{font-size:20px}
+.btn{padding:13px 22px;font-size:15px}
+.result-hero{padding:26px 18px;border-radius:18px}
+.score-ring{width:140px;height:140px}
+.score-ring b{font-size:36px}
+.rstat{padding:12px 16px;min-width:0;flex:1 1 calc(50% - 14px)}
+.rstat b{font-size:21px}
+.result-actions{flex-direction:column}
+.result-actions .btn,.result-actions .smallbtn{width:100%}
+}
+
+/* ===== SMALL PHONE ===== */
+@media(max-width:380px){
+.navgrid{grid-template-columns:repeat(6,1fr)}
+.timer .clock{font-size:15px}
+.option .txt{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast"></div>
+<script>
+const QUESTIONS=[
+{"t": "Kelainan Rambut", "q": "Seorang wanita 29 tahun mengeluhkan rambut rontok sejak 2 minggu. Pasien baru melahirkan anak pertama 1 bulan lalu. Riwayat alergi obat disangkal. Hair pull test (+). Apakah diagnosis pasien?", "o": ["Telogen effluvium", "Anagen effluvium", "Alopecia androgenik", "Alopecia areata", "Trikotilomania"], "a": "Telogen effluvium", "skdi": "2", "e": "Rontok difus 1-3 bulan pasca persalinan dengan hair pull test (+) khas telogen effluvium akibat banyak folikel masuk fase telogen serempak (gangguan siklus folikel). Anagen effluvium terkait kemoterapi/racun. Alopecia androgenik bertahap pola tertentu. Alopecia areata berupa patch botak bulat tanpa radang. Trikotilomania akibat menarik rambut sendiri.", "n": "Anthelix no.6 / Ascendens no.1"},
+{"t": "Laser/Fisika Kulit", "q": "Seorang pasien mengeluh tampak urat/pembuluh melebar pada wajah (telangiektasia) dan akan dilakukan terapi laser. Apakah target chromophore yang dituju?", "o": ["Hemoglobin", "Melanin", "DNA", "Asam urat", "NADH"], "a": "Hemoglobin", "skdi": "— (farmakoterapi/prosedur)", "e": "Laser bekerja dengan selective photothermolysis. Pada lesi vaskular seperti telangiektasia target chromophore adalah hemoglobin sehingga terjadi koagulasi pembuluh. Melanin target untuk lesi pigmen/rambut, DNA untuk terapi fotodinamik, asam urat dan NADH bukan target lesi vaskular wajah.", "n": "Ascendens no.2 / Aorta 19 no.33"},
+{"t": "IMS", "q": "Seorang wanita 35 tahun, pekerja seks, datang dengan luka pada kemaluan sejak 1 minggu yang terasa perih. Pemeriksaan fisik: ulkus multipel, tepi tidak rata, bergaung, dasar kotor, mudah berdarah. Apakah diagnosis yang tepat?", "o": ["Ulkus molle", "Ulkus durum", "Granuloma inguinale", "Ulkus diabetikum", "Ulkus dekubitus"], "a": "Ulkus molle", "skdi": "4A", "e": "Ulkus multipel, nyeri, tepi bergaung, dasar kotor, mudah berdarah khas ulkus molle (chancroid, Haemophilus ducreyi). Ulkus durum (sifilis) soliter, bersih, tidak nyeri, ada indurasi. Granuloma inguinale lesi granulomatosa beefy-red. Ulkus diabetikum dan dekubitus tidak terkait IMS.", "n": "Anthelix no.15 / Ascendens no.3"},
+{"t": "Erupsi Obat", "q": "Seorang laki-laki mengalami eritema di seluruh tubuh menyerupai campak setelah meminum obat. Apakah diagnosis yang tepat?", "o": ["Exanthematous drug eruption", "Fixed drug eruption", "Urtikaria", "Angioedema", "Morbili"], "a": "Exanthematous drug eruption", "skdi": "4A", "e": "Ruam makulopapular difus mirip morbili yang muncul beberapa hari setelah obat adalah exanthematous (morbiliform) drug eruption. Fixed drug eruption muncul di tempat yang sama setiap terpapar. Urtikaria berupa wheal gatal. Angioedema edema dermis dalam. Morbili adalah infeksi virus, bukan erupsi obat.", "n": "Ascendens no.3 / Axon 20 no.45"},
+{"t": "Mikosis", "q": "Seorang wanita dengan kandidiasis vulvovaginalis. Apakah tatalaksana per oral yang tepat?", "o": ["Flukonazol 150 mg dosis tunggal", "Griseofulvin 500 mg dosis tunggal", "Metronidazol 2 gram dosis tunggal", "Doksisiklin 100 mg dosis tunggal", "Asiklovir 200 mg dosis tunggal"], "a": "Flukonazol 150 mg dosis tunggal", "skdi": "4A", "e": "Kandidiasis vulvovaginalis lini oral adalah flukonazol 150 mg dosis tunggal. Griseofulvin hanya untuk dermatofita. Metronidazol untuk trikomoniasis/vaginosis bakterial. Doksisiklin antibiotik (klamidia). Asiklovir antivirus (herpes).", "n": "Amygdala no.82 / Ascendens no.106"},
+{"t": "Eritroskuamosa", "q": "Seorang perempuan 20 tahun mengeluh bercak oval kemerahan bersisik di dada. Seminggu kemudian muncul bercak serupa lebih kecil menyebar ke perut dan punggung dengan pola menyerupai pohon cemara. Lesi pertama disebut herald patch. Apakah diagnosis paling mungkin?", "o": ["Pityriasis rosea", "Psoriasis vulgaris", "Tinea corporis", "Liken planus", "Dermatitis seboroik"], "a": "Pityriasis rosea", "skdi": "4A", "e": "Herald patch diikuti lesi sekunder dengan pola christmas-tree dan skuama kolaret khas pityriasis rosea. Psoriasis berskuama mikaseus tebal di ekstensor. Tinea corporis KOH (+) dengan central healing. Liken planus berupa papul ungu poligonal pruritik. Dermatitis seboroik di area seboroik dengan skuama berminyak.", "n": "Ascendens no.4 / Aorta 19 no.11"},
+{"t": "Farmakologi", "q": "Antihistamin H2 terutama bekerja pada reseptor di lokasi mana?", "o": ["Sel parietal lambung", "Sel hati", "Serat otot", "Thalamus", "Hipofisis"], "a": "Sel parietal lambung", "skdi": "— (farmakologi)", "e": "Reseptor H2 banyak terdapat pada sel parietal lambung yang memediasi sekresi asam; antagonis H2 (mis. simetidin, ranitidin) menghambatnya. Lokasi lain bukan target utama reseptor H2.", "n": "Ascendens no.5 / Amygdala no.92"},
+{"t": "Mikosis/Bakteri", "q": "Pada pemeriksaan lampu Wood ditemukan fluoresensi merah kecoklatan (coral red). Apakah diagnosis yang sesuai?", "o": ["Eritrasma", "Tinea kapitis", "Tinea versikolor", "Impetigo krustosa", "Pitiriasis alba"], "a": "Eritrasma", "skdi": "4A", "e": "Coral red pada lampu Wood khas eritrasma akibat Corynebacterium minutissimum (porfirin). Tinea kapitis bisa hijau (Microsporum). Tinea versikolor kuning keemasan. Impetigo dan pitiriasis alba tidak berfluoresensi coral red.", "n": "Ascendens no.6 / Aorta 19 no.62"},
+{"t": "Farmakologi", "q": "Manakah contoh obat antihistamin generasi pertama?", "o": ["Chlorpheniramine", "Loratadine", "Cetirizine", "Fexofenadine", "Desloratadine"], "a": "Chlorpheniramine", "skdi": "— (farmakologi)", "e": "Chlorpheniramine (CTM) adalah antihistamin H1 generasi pertama yang menembus sawar darah-otak sehingga sedatif. Loratadine, cetirizine, fexofenadine, dan desloratadine adalah generasi kedua/ketiga yang non-sedatif.", "n": "Aorta 19 no.51 / Ascendens no.6"},
+{"t": "Mikosis", "q": "Seorang laki-laki 45 tahun mengeluh ruam kemerahan dan gatal di ketiak. Pemeriksaan: lesi eritematosa berbatas tegas, basah, disertai lesi satelit di sekitarnya. Apakah pengobatan yang paling tepat?", "o": ["Ketokonazol topikal", "Asiklovir topikal", "Asam salisilat 2%", "Neomisin salep", "Hidrokortison topikal"], "a": "Ketokonazol topikal", "skdi": "4A", "e": "Lesi eritem basah berbatas tegas dengan lesi satelit khas kandidiasis kutis; terapi topikal golongan azol seperti ketokonazol. Asiklovir untuk virus, asam salisilat keratolitik, neomisin antibiotik, hidrokortison steroid (justru dapat memperberat infeksi jamur).", "n": "Ascendens no.6 / Aorta 19 no.69"},
+{"t": "Kusta", "q": "Pada pasien kusta paucibasiler yang mengalami reaksi, jenis reaksi imunologis yang paling mungkin terjadi adalah?", "o": ["Reaksi tipe 1 (reaksi reversal)", "Reaksi tipe 2 (ENL)", "Reaksi anafilaksis", "Reaksi hipersensitivitas tipe III", "Tidak ada reaksi imun"], "a": "Reaksi tipe 1 (reaksi reversal)", "skdi": "4A", "e": "Reaksi tipe 1 (reversal) merupakan hipersensitivitas tipe IV (seluler) dan dapat terjadi pada PB maupun MB. Reaksi tipe 2 (ENL) hanya pada MB dan merupakan kompleks imun (tipe III). Anafilaksis tidak terkait kusta.", "n": "Ascendens no.6 / Aorta 19 no.35"},
+{"t": "Pioderma", "q": "Anak perempuan 1,5 tahun dengan lepuh di sekitar wajah dan badan sejak 5 hari. Pemeriksaan: bula hipopion multipel, sebagian erosi meninggalkan kolaret. Apakah diagnosis kerja?", "o": ["Impetigo bulosa", "Pemfigus bulosa", "Karbunkel", "Furunkel", "Impetigo krustosa"], "a": "Impetigo bulosa", "skdi": "4A", "e": "Bula hipopion (bula berisi pus) dengan kolaret setelah pecah pada anak khas impetigo bulosa akibat S. aureus penghasil toksin eksfoliatif. Pemfigus jarang pada bayi. Karbunkel/furunkel adalah infeksi folikel. Impetigo krustosa berkrusta madu tanpa bula.", "n": "Aorta 19 no.94 / Ascendens no.10"},
+{"t": "Pioderma", "q": "Seorang laki-laki 25 tahun dengan tungkai bawah kiri kemerahan, bengkak, nyeri, dan demam. Pemeriksaan: plakat eritema, edema, difus, batas tidak tegas, teraba hangat, nyeri tekan. Apakah diagnosis?", "o": ["Selulitis", "Erisipelas", "Folikulitis", "Furunkel", "Karbunkel"], "a": "Selulitis", "skdi": "4A", "e": "Eritema difus batas tidak tegas mengenai dermis-subkutis dengan tanda radang khas selulitis. Erisipelas berbatas tegas dan meninggi (dermis superfisial). Folikulitis/furunkel/karbunkel adalah infeksi folikel rambut.", "n": "Ascendens no.11 / Axon 20 no.29"},
+{"t": "Kusta", "q": "Perempuan 40 tahun dengan bercak putih di tangan sejak 6 bulan disertai baal, tanpa gatal. Patch hipopigmentasi batas tidak tegas 3 buah, pembesaran saraf (-), slit skin smear +2. Berdasarkan kunci sumber, apakah terapi yang dipakai?", "o": ["Rifampisin 600 mg/bulan dan dapson 100 mg/hari", "Rifampisin 600 mg/bulan, lampren 300 mg/bulan, lampren 50 mg/hari, dapson 100 mg/hari", "Rifampisin 600 mg/bulan, lampren 100 mg/bulan, lampren 50 mg/hari", "Rifampisin 600 mg/bulan dan lampren 50 mg/hari", "Rifampisin 300 mg/bulan dan dapson 600 mg/hari"], "a": "Rifampisin 600 mg/bulan dan dapson 100 mg/hari", "skdi": "4A", "e": "Catatan EBM: menurut WHO setiap smear positif diklasifikasikan MB sehingga seharusnya regimen MB (rifampisin+lampren+dapson). Namun kunci sumber soal ini konsisten memilih regimen PB (rifampisin 600 mg/bulan + dapson 100 mg/hari selama 6 bulan). Pilihan disesuaikan dengan kunci sumber; pada praktik, klasifikasi WHO tetap dijadikan acuan.", "n": "Aorta 19 no.59 / Ascendens no.12"},
+{"t": "Eritroskuamosa", "q": "Kelainan kulit berupa bercak eritema berbatas tegas dengan skuama kasar berlapis transparan; pemeriksaan tetesan lilin, Auspitz, dan Koebner (+). Apakah tatalaksana lini yang tepat?", "o": ["Kortikosteroid topikal", "Asiklovir", "Rifampisin", "Griseofulvin", "Permetrin"], "a": "Kortikosteroid topikal", "skdi": "3A", "e": "Fenomena tetesan lilin, Auspitz, dan Koebner khas psoriasis; lini topikal mencakup kortikosteroid (dan analog vitamin D). Asiklovir untuk virus, rifampisin/griseofulvin antimikroba, permetrin untuk skabies.", "n": "Ascendens no.13 / Amygdala no.82"},
+{"t": "UKK", "q": "Penonjolan/perubahan warna kulit menjadi kemerahan akibat perdarahan di dalam kulit dengan diameter lebih dari 1 cm disebut?", "o": ["Ekimosis", "Petekie", "Telangiektasis", "Makula", "Patch"], "a": "Ekimosis", "skdi": "— (UKK)", "e": "Perdarahan dalam kulit >1 cm disebut ekimosis; <1 cm disebut petekie. Telangiektasis adalah pelebaran kapiler. Makula/patch adalah perubahan warna datar tanpa perdarahan.", "n": "Ascendens no.14 / Aorta 19 no.7"},
+{"t": "UKK", "q": "Manakah berikut ini yang termasuk efloresensi (UKK) sekunder?", "o": ["Ekskoriasi", "Telangiektasis", "Purpura", "Kista", "Komedo"], "a": "Ekskoriasi", "skdi": "— (UKK)", "e": "Ekskoriasi (akibat garukan) merupakan UKK sekunder. Telangiektasis, purpura, kista, dan komedo termasuk kelainan primer.", "n": "Ascendens no.15 / Amygdala no.5"},
+{"t": "UKK", "q": "Defek yang mengenai seluruh epidermis dan melebihi membrana basalis, bahkan mencapai dermis atau subkutis, sehingga penyembuhannya meninggalkan sikatriks disebut?", "o": ["Ulkus", "Erosi", "Ekskoriasi", "Fisura", "Atrofi"], "a": "Ulkus", "skdi": "— (UKK)", "e": "Defek hingga melewati membrana basalis (dermis/subkutis) yang sembuh dengan sikatriks adalah ulkus. Erosi hanya epidermis tanpa sikatriks. Ekskoriasi akibat garukan. Fisura retakan linier. Atrofi penipisan kulit.", "n": "Ascendens no.16 / Aorta 19 no.79"},
+{"t": "Pioderma", "q": "Anak laki-laki 5 tahun dengan pleting-pleting seluruh tubuh diawali demam, tampak papul eritem, vesikel, pustul sebagian erosi tertutup krusta (honey crust); kakak sakit serupa 2 minggu lalu. Pemeriksaan penunjang yang tepat untuk konfirmasi impetigo?", "o": ["Pewarnaan Gram", "KOH", "Tzanck smear (Giemsa)", "Biopsi", "Kultur Sabouraud"], "a": "Pewarnaan Gram", "skdi": "4A", "e": "Krusta madu (honey crust) khas impetigo; pewarnaan Gram menemukan kokus Gram positif. Tzanck smear untuk varisela (sel datia berinti banyak). KOH untuk jamur. Kultur Sabouraud untuk jamur. Biopsi tidak rutin.", "n": "Ascendens no.17 / Aorta 19 no.19"},
+{"t": "Virologi", "q": "Anak 2 tahun dengan bercak merah hampir seluruh tubuh, diawali demam, bercak mulai dari wajah dan belakang telinga kemudian meluas, mata merah. Apakah dasar patofisiologi penyakit ini?", "o": ["Sistem imun humoral mengendalikan replikasi virus sedangkan respon selular menghilangkan sel terinfeksi", "IgE melawan virus", "Imun seluler saja yang berperan", "Reaksi hipersensitivitas tipe I", "Autoimun terhadap melanosit"], "a": "Sistem imun humoral mengendalikan replikasi virus sedangkan respon selular menghilangkan sel terinfeksi", "skdi": "4A", "e": "Pada campak (morbili), imunitas humoral (antibodi) membatasi replikasi virus sedangkan imunitas selular membersihkan sel terinfeksi. IgE dan hipersensitivitas tipe I bukan mekanisme utama; bukan autoimun.", "n": "Ascendens no.18 / Aorta 19 no.18"},
+{"t": "Virologi", "q": "Seorang laki-laki 45 tahun dengan plenting berair terasa panas, menyebar dari paha kiri ke bawah sesuai dermatom; demam 3 hari sebelumnya; riwayat DM. Apakah konfigurasi lesi pada pasien ini?", "o": ["Zosteriform", "Blaskoid", "Retikular", "Targetoid", "Scattered"], "a": "Zosteriform", "skdi": "4A", "e": "Vesikel berkelompok mengikuti dermatom pada herpes zoster berkonfigurasi zosteriform. Blaskoid mengikuti garis Blaschko, retikular seperti jala, targetoid seperti target (eritema multiforme), scattered tersebar acak.", "n": "Ascendens no.19 / Anthelix no.3"},
+{"t": "Kelenjar Sebasea", "q": "Seorang remaja datang dengan akne vulgaris. Apakah patogenesis utama akne vulgaris?", "o": ["Produksi sebum berlebih", "Penyumbatan kelenjar apokrin", "Kolonisasi Staphylococcus aureus", "Infeksi Staphylococcus aureus", "Reaksi autoimun folikel"], "a": "Produksi sebum berlebih", "skdi": "4A", "e": "Patogenesis akne meliputi hiperproduksi sebum, hiperkeratinisasi folikel, kolonisasi Cutibacterium acnes, dan inflamasi pada kelenjar sebasea (bukan apokrin). S. aureus bukan penyebab utama.", "n": "Ascendens no.21"},
+{"t": "Kusta", "q": "Pengobatan kusta tipe lesi tunggal (single lesion paucibacillary) menggunakan regimen?", "o": ["Rifampisin, Ofloksasin, dan Minosiklin (ROM) dosis tunggal", "Dapson saja", "Dapson dan rifampisin", "Dapson, rifampisin, klofazimin", "Klofazimin dan dapson"], "a": "Rifampisin, Ofloksasin, dan Minosiklin (ROM) dosis tunggal", "skdi": "4A", "e": "Kusta lesi tunggal dapat diobati dengan ROM (rifampisin 600 mg, ofloksasin 400 mg, minosiklin 100 mg) dosis tunggal. Regimen MDT-PB/MB lain untuk lesi lebih banyak.", "n": "Ascendens no.23 / Amygdala no.107"},
+{"t": "IMS", "q": "Untuk menegakkan kondiloma akuminata, pemeriksaan sederhana yang dilakukan adalah?", "o": ["Tes asam asetat 5%", "Tinktura podofilin 25%", "Tinktura podofilin 50%", "Pewarnaan Gram", "Tzanck test"], "a": "Tes asam asetat 5%", "skdi": "3A", "e": "Acetowhite test (asam asetat 5%) membuat lesi HPV memutih dan membantu menegakkan kondiloma akuminata. Tinktura podofilin adalah terapi bukan diagnostik. Gram untuk bakteri, Tzanck untuk virus herpes.", "n": "Ascendens no.24 / Amygdala no.40"},
+{"t": "Pigmentasi", "q": "Seorang bayi dengan bercak merah (lesi vaskular jinak) pada wajah. Apakah tata laksana topikal yang sesuai untuk bercak merah pada bayi sesuai kunci sumber?", "o": ["Hidrokortison 1%", "Hidrokuinon 2-5%", "Asam azaleat 10%", "Tretinoin 1-5%", "Desoksimetason krim 0,05%"], "a": "Hidrokortison 1%", "skdi": "3A", "e": "Pada bayi dipilih kortikosteroid potensi lemah seperti hidrokortison 1% karena kulit bayi tipis. Hidrokuinon/asam azaleat/tretinoin untuk hiperpigmentasi (dan tretinoin/hidrokuinon dihindari pada bayi). Desoksimetason terlalu kuat untuk bayi.", "n": "Ascendens no.25 / Amygdala no.15"},
+{"t": "Vesikobulosa", "q": "Seseorang dengan lesi pecah 4 hari, diawali nyeri di mukosa bukal. Lesi mulai di tangan lalu menyebar ke kaki dan perut. Bula berdinding kendur, Nikolsky (+), akantolisis sel epitel di dasar bula. Apakah diagnosis pasti?", "o": ["Pemfigus vulgaris", "Pemfigoid bulosa", "Herpes zoster", "Dermatitis herpetiformis", "Epidermolisis bulosa"], "a": "Pemfigus vulgaris", "skdi": "3A", "e": "Bula kendur, Nikolsky (+), akantolisis suprabasal, dan keterlibatan mukosa khas pemfigus vulgaris. Pemfigoid bulosa bula tegang Nikolsky (-). Herpes zoster vesikel dermatomal. Dermatitis herpetiformis vesikel berkelompok di ekstensor. Epidermolisis bulosa terkait trauma/genetik.", "n": "Ascendens no.26 / Anthelix no.11"},
+{"t": "Kelainan Kuku", "q": "Bagian kuku yang berfungsi membentuk jaringan kuku baru adalah?", "o": ["Matriks kuku", "Hiponikium", "Lunula", "Nail plate", "Nail bed"], "a": "Matriks kuku", "skdi": "— (anatomi)", "e": "Matriks kuku adalah area germinal yang memproduksi lempeng kuku baru. Lunula adalah bagian distal matriks yang tampak putih. Hiponikium, nail plate, dan nail bed tidak membentuk jaringan kuku baru.", "n": "Ascendens no.27"},
+{"t": "Keislaman", "q": "Batas aurat wanita menurut mazhab Syafii adalah?", "o": ["Seluruh tubuh kecuali wajah dan telapak tangan", "Seluruh tubuh termasuk kuku", "Wajah dan telapak tangan saja", "Dari pusat hingga lutut", "Hanya rambut dan dada"], "a": "Seluruh tubuh kecuali wajah dan telapak tangan", "skdi": "— (keislaman)", "e": "Menurut mazhab Syafii aurat wanita adalah seluruh tubuh kecuali wajah dan telapak tangan. Pilihan lain tidak sesuai.", "n": "Ascendens no.28 / Aorta 19 no.22"},
+{"t": "Keislaman", "q": "Islam sangat memperhatikan pencegahan penyakit menular seksual, sebagaimana firman Allah yang melarang mendekati zina, terdapat pada surah?", "o": ["Al-Isra: 32", "Fussilat: 20-21", "Ar-Rad: 28", "An-Nisa: 43", "Al-Baqarah: 184"], "a": "Al-Isra: 32", "skdi": "— (keislaman)", "e": "QS Al-Isra ayat 32 melarang mendekati zina, relevan dengan pencegahan IMS. Fussilat 20-21 tentang kulit menjadi saksi. Surah lain tidak sesuai konteks.", "n": "Ascendens no.30 / Aorta 19 no.9"},
+{"t": "Bioetik", "q": "Seorang perempuan hamil mengalami KDRT oleh suaminya karena suami tidak setuju kehamilan dan ingin menggugurkannya, namun pasien menolak. Kaidah bioetik apa yang dilanggar oleh suami?", "o": ["Non-maleficence", "Beneficence", "Autonomy", "Justice", "Veracity"], "a": "Non-maleficence", "skdi": "— (etik)", "e": "Suami menimbulkan bahaya/menyakiti pasien sehingga melanggar non-maleficence (primum non nocere). Beneficence berbuat baik, autonomy menghormati keputusan, justice keadilan, veracity kejujuran.", "n": "Ascendens no.75 / Axon 20 no.26"},
+{"t": "Bioetik", "q": "Seorang pasien KDRT ditolong tetangganya. Tetangga ingin melaporkan ke pihak berwajib namun pasien menolak hal tersebut sampai terjadi. Sikap tetangga yang menghormati keputusan pasien untuk tidak dilaporkan mencerminkan kaidah?", "o": ["Autonomy", "Justice", "Veracity", "Beneficence", "Non-maleficence"], "a": "Autonomy", "skdi": "— (etik)", "e": "Menghormati keinginan/keputusan pasien adalah penerapan autonomy. Justice keadilan, veracity kejujuran, beneficence berbuat baik, non-maleficence tidak membahayakan.", "n": "Ascendens no.33"},
+{"t": "Eritroskuamosa", "q": "Pasien 20 tahun, sejak 1 minggu muncul lesi baru lebih kecil di dada, punggung, dan lengan atas berupa plak eritem multipel diskret dengan skuama kolaret (+). Apakah terapi simtomatik yang sesuai?", "o": ["Lotion calamine", "Krim ketokonazol", "Krim mupirosin", "Klindamisin gel", "Krim asiklovir"], "a": "Lotion calamine", "skdi": "4A", "e": "Gambaran khas pityriasis rosea (skuama kolaret), bersifat self-limiting; terapi simtomatik antipruritus seperti lotion calamine. Ketokonazol untuk jamur, mupirosin/klindamisin untuk bakteri, asiklovir untuk virus.", "n": "Ascendens no.42 / Anthelix no.61"},
+{"t": "Pigmentasi", "q": "Perempuan 40 tahun dengan bercak kecoklatan di wajah sejak 2 tahun, saat hamil anak ketiga dan memakai pil KB. Pemeriksaan: makula hiperpigmentasi ireguler, berbatas tegas, tersebar di wajah. Apakah diagnosis yang sesuai?", "o": ["Melasma", "Veruka vulgaris", "Okronosis", "Freckles", "Hiperpigmentasi pasca inflamasi"], "a": "Melasma", "skdi": "4A", "e": "Hiperpigmentasi simetris di wajah terkait kehamilan/kontrasepsi hormonal dan paparan UV khas melasma. Veruka vulgaris adalah kutil. Okronosis akibat hidrokuinon kronik. Freckles bercak kecil di area terpapar matahari. PIH muncul setelah inflamasi.", "n": "Ascendens no.36 / Axon 20 no.4"},
+{"t": "Vesikobulosa", "q": "Laki-laki 52 tahun dengan lepuh dan luka pada wajah dan badan. Pemeriksaan: bula kendur mudah pecah dan erosi pada kulit kepala, wajah, dada, aksila, dan mukosa mulut, Nikolsky (+); histopatologi: akantolisis suprabasal. Apakah penatalaksanaan yang sesuai?", "o": ["Kortikosteroid", "Tetrasiklin", "Azitromisin", "Dapson", "Sulfapiridin"], "a": "Kortikosteroid", "skdi": "3A", "e": "Pemfigus vulgaris ditangani dengan kortikosteroid sistemik dosis tinggi sebagai lini utama (dengan adjuvan imunosupresan). Tetrasiklin/azitromisin antibiotik, dapson dan sulfapiridin untuk dermatitis herpetiformis.", "n": "Aorta 19 no.6 / Ascendens no.37"},
+{"t": "Mikosis", "q": "Perempuan 45 tahun, gatal di bawah payudara sejak 2 minggu, memberat saat berkeringat, lesi melebar; riwayat DM. Pemeriksaan: plakat eritem dengan lesi satelit, tepi aktif. Apakah hasil pemeriksaan penunjang sederhana yang diharapkan?", "o": ["Pseudohifa", "Spora tunggal (spots)", "Miselium pendek", "Diplokokus", "Hifa panjang bersepta"], "a": "Pseudohifa", "skdi": "4A", "e": "Lesi satelit pada lipatan dengan faktor risiko DM khas kandidiasis kutis; KOH menunjukkan pseudohifa dan blastospora. Miselium pendek + spora bergerombol khas tinea versikolor; hifa panjang bersepta khas dermatofita; diplokokus untuk bakteri.", "n": "Aorta 19 no.8 / Ascendens no.62"},
+{"t": "Mikosis", "q": "Anak 10 tahun, gatal kepala sejak 1 bulan, memelihara kucing, rambut rontok dan skuama tipis. Apakah pemeriksaan penunjang gold standard untuk tinea kapitis?", "o": ["Kultur Sabouraud", "Mikroskopi KOH 10%", "Pemeriksaan serologis", "Lampu Wood", "Biopsi kulit"], "a": "Kultur Sabouraud", "skdi": "4A", "e": "Kultur Sabouraud adalah gold standard karena mengidentifikasi spesies jamur. KOH hanya skrining cepat, lampu Wood membantu (tidak semua jamur berfluoresensi), serologi tidak digunakan, biopsi bukan rutin.", "n": "Ascendens no.39 / Anthelix no.28"},
+{"t": "Tumor Kulit", "q": "Bayi 2 bulan memiliki benjolan/nodul eritem di wajah yang membesar lalu lama-kelamaan menghilang sendiri. Apakah diagnosis yang tepat?", "o": ["Infantile hemangioma", "Keratosis seboroik", "Tinea kapitis", "Psoriasis", "Nevus pigmentosus"], "a": "Infantile hemangioma", "skdi": "2", "e": "Hemangioma infantil tumbuh pada bulan-bulan pertama lalu involusi spontan. Keratosis seboroik pada lansia, tinea kapitis infeksi jamur kepala, psoriasis bercak skuama, nevus pigmentosus tahi lalat.", "n": "Anthelix no.74 / Ascendens no.40"},
+{"t": "Farmakologi", "q": "Penurunan dosis obat secara bertahap saat menghentikan terapi jangka panjang disebut?", "o": ["Tappering off", "Loading dose", "Maintenance dose", "Titrasi naik", "Pulse therapy"], "a": "Tappering off", "skdi": "— (farmakologi)", "e": "Penurunan dosis bertahap disebut tappering off, penting pada kortikosteroid untuk mencegah insufisiensi adrenal. Loading dose dosis awal besar, maintenance dosis rumatan, pulse therapy dosis tinggi intermiten.", "n": "Ascendens no.41"},
+{"t": "Vesikobulosa", "q": "Pada histopatologi ditemukan akantolisis suprabasal, sedangkan pada bullous pemphigoid pemeriksaan imunofluoresensi menunjukkan?", "o": ["Deposit IgG dan C3 linier pada membrana basalis", "Deposit IgA granular pada papila dermis", "Deposit IgM pada pembuluh darah", "Deposit fibrin interseluler", "Tidak ada deposit imun"], "a": "Deposit IgG dan C3 linier pada membrana basalis", "skdi": "3A", "e": "Bullous pemphigoid menunjukkan deposit IgG dan C3 linier sepanjang membrana basalis (DEJ). Deposit IgA granular di papila dermis khas dermatitis herpetiformis. Pilihan lain tidak sesuai.", "n": "Ascendens no.80 / Aorta 19 no.16"},
+{"t": "Parasit", "q": "Anak mengeluh gatal dan rambut mudah patah di belakang telinga; ditemukan telur (nits) melekat pada batang rambut. Apakah terapi yang tepat untuk pedikulosis kapitis?", "o": ["Permetrin 1%", "Permetrin 5%", "Shampo ketokonazol 2%", "Permetrin 10%", "Sulfur presipitatum 5%"], "a": "Permetrin 1%", "skdi": "4A", "e": "Pedikulosis kapitis diterapi permetrin 1%. Permetrin 5% untuk skabies. Ketokonazol untuk jamur. Permetrin 10% tidak digunakan rutin.", "n": "Ascendens no.45 / Amygdala no.98"},
+{"t": "Mikosis", "q": "Obat oral lini pertama untuk tinea kapitis (gray-white patch) adalah?", "o": ["Griseofulvin", "Nistatin", "Metronidazol", "Permetrin", "Mupirosin"], "a": "Griseofulvin", "skdi": "4A", "e": "Griseofulvin oral adalah pilihan utama tinea kapitis karena efektif terhadap dermatofita. Nistatin untuk kandida, metronidazol antiprotozoa/antibakteri, permetrin antiparasit, mupirosin antibiotik topikal.", "n": "Anthelix no.72 / Ascendens no.57"},
+{"t": "Patologi", "q": "Pada gambaran histopatologi tuberkel (granuloma tuberkulosis), sel yang dominan menyusun tuberkel berasal dari?", "o": ["Histiosit (sel epiteloid)", "Limfosit", "Leukosit", "Neutrofil", "Eosinofil"], "a": "Histiosit (sel epiteloid)", "skdi": "— (patologi)", "e": "Tuberkel tersusun atas sel epiteloid dan sel datia Langhans yang berasal dari histiosit/makrofag, dikelilingi limfosit di perifer. Neutrofil dan eosinofil bukan komponen utama granuloma.", "n": "Amygdala no.23 / Ascendens no.45"},
+{"t": "Parasit", "q": "Tata laksana kausatif cutaneous larva migrans (creeping eruption) adalah?", "o": ["Albendazol 400 mg selama 3 hari", "Prednison 2x5 mg selama 5 hari", "Pirantel pamoat 125 mg dosis tunggal", "Cetirizin 1x10 mg selama 5 hari", "Permetrin krim 5%"], "a": "Albendazol 400 mg selama 3 hari", "skdi": "4A", "e": "CLM diterapi albendazol 400 mg/hari selama 3 hari (alternatif tiabendazol). Prednison/cetirizin hanya simtomatik, pirantel pamoat untuk cacing usus, permetrin untuk skabies/pedikulosis.", "n": "Ascendens no.50 / Amygdala no.32"},
+{"t": "Pigmentasi", "q": "Manakah pernyataan yang BENAR terkait pengaruh senyawa terhadap pigmentasi kulit?", "o": ["Glutathione berperan sebagai inhibitor melanogenesis", "MSH menyebabkan hipopigmentasi nyata", "Estrogen menurunkan jumlah melanosit", "Progesteron secara aktif menurunkan jumlah melanosit", "Glutathione merangsang produksi melanin melalui aktivasi tirosinase"], "a": "Glutathione berperan sebagai inhibitor melanogenesis", "skdi": "— (fisiologi)", "e": "Glutathione menghambat melanogenesis (inhibitor tirosinase, mengalihkan ke feomelanin). MSH justru merangsang melanin; estrogen dan progesteron cenderung meningkatkan pigmentasi (mis. melasma), bukan menurunkan melanosit.", "n": "Ascendens no.52"},
+{"t": "IMS", "q": "Perempuan 28 tahun dengan kutil di sekitar kemaluan sejak 3 minggu, makin bertambah, tidak nyeri/gatal; riwayat berganti pasangan tanpa kondom. Apakah terapi yang paling tepat (kondiloma akuminata)?", "o": ["Tinktura podofilin 25%", "Asam asetat 5%", "Asam trikloroasetat 25%", "5-fluorourasil", "Asiklovir"], "a": "Tinktura podofilin 25%", "skdi": "4A", "e": "Kondiloma akuminata dapat diterapi tinktura podofilin 25% (atau TCA 80-90%). Asam asetat 5% adalah uji diagnostik, bukan terapi. 5-FU jarang lini pertama. Asiklovir untuk herpes.", "n": "Aorta 19 no.17 / Ascendens no.53"},
+{"t": "Dermatitis", "q": "Perempuan 25 tahun, penata rambut, gatal di kedua tangan sejak 2 minggu disertai bercak kemerahan dan bersisik; membaik saat cuti. Pemeriksaan: patch dan papul eritem multipel dengan ekskoriasi dan skuama. Apakah diagnosis yang paling tepat?", "o": ["Dermatitis kontak alergi", "Dermatitis kontak iritan", "Neurodermatitis", "Dermatitis numularis", "Dishidrosis"], "a": "Dermatitis kontak alergi", "skdi": "4A", "e": "Membaik saat menjauh dari pajanan (cuti) dan terkait bahan salon menunjukkan dermatitis kontak alergi (hipersensitivitas tipe IV dengan sensitisasi sebelumnya). DKI akibat iritan langsung tanpa sensitisasi; lainnya pola/morfologi berbeda.", "n": "Aorta 19 no.20 / Ascendens no.53"},
+{"t": "Parasit", "q": "Seorang ibu hamil dengan gatal terutama malam hari di sela jari dan pergelangan tangan; anggota keluarga sakit serupa. Apakah terapi pilihan untuk skabies?", "o": ["Permetrin 5%", "Sulfur presipitatum 1%", "Benzil benzoat 1%", "Mikonazol 2%", "Mupirosin 2%"], "a": "Permetrin 5%", "skdi": "4A", "e": "Permetrin 5% adalah lini pertama skabies dan aman pada kehamilan. Sulfur presipitatum dipakai 5-10%, benzil benzoat konsentrasi lebih tinggi, mikonazol antijamur, mupirosin antibiotik.", "n": "Aorta 19 no.27 / Ascendens no.95"},
+{"t": "Farmakologi", "q": "Sediaan krim untuk wajah dipakai 2 kali sehari selama 1 minggu. Berapakah perkiraan jumlah obat yang diresepkan?", "o": ["15 gram", "5 gram", "10 gram", "20 gram", "25 gram"], "a": "15 gram", "skdi": "— (farmakologi)", "e": "Wajah membutuhkan sekitar 3 gram per aplikasi tunggal seluruh wajah; pemakaian 2x sehari selama 7 hari memerlukan kira-kira 15 gram sesuai perhitungan kebutuhan topikal.", "n": "Amygdala no.93 / Axon 20 no.30"},
+{"t": "Dermatitis", "q": "Seorang cleaning service mengalami eritem dan skuama pada tangan setelah terkena cairan pembersih. Apakah pemeriksaan penunjang yang tepat untuk menegakkan dermatitis kontak?", "o": ["Patch test", "Lampu Wood", "Skin smear", "KOH", "Tzanck test"], "a": "Patch test", "skdi": "4A", "e": "Patch test (uji tempel) adalah baku untuk identifikasi alergen pada dermatitis kontak. Lampu Wood untuk infeksi tertentu, skin smear untuk kusta, KOH untuk jamur, Tzanck untuk virus.", "n": "Anthelix no.52 / Ascendens no.59"},
+{"t": "Kelainan Rambut", "q": "Laki-laki 50 tahun mengeluh rambut rontok dengan pola kebotakan membentuk huruf M. Apakah tata laksana yang tepat?", "o": ["Finasterid", "Ketokonazol", "Permetrin", "Penisilin", "Benzatin penisilin"], "a": "Finasterid", "skdi": "3A", "e": "Male pattern baldness (androgenetic alopecia) diterapi finasterid (inhibitor 5-alfa reduktase) dan/atau minoksidil. Ketokonazol antijamur, permetrin antiparasit, penisilin antibiotik.", "n": "Ascendens no.60 / Aorta 19 no.56"},
+{"t": "IMS", "q": "Ditemukan whiff test (amis) positif, clue cell, dan duh tubuh berwarna putih keabuan. Apakah diagnosis yang sesuai?", "o": ["Vaginosis bakterial", "Trikomoniasis", "Kandidiasis vulvovaginalis", "Ulkus molle", "Ulkus genital"], "a": "Vaginosis bakterial", "skdi": "4A", "e": "Clue cell, whiff test (+), dan duh homogen putih keabuan memenuhi kriteria Amsel untuk vaginosis bakterial. Trikomoniasis duh kuning kehijauan berbuih dengan strawberry cervix, kandidiasis duh seperti susu pecah gatal.", "n": "Ascendens no.61"},
+{"t": "Kelenjar Sebasea", "q": "Pengobatan akne vulgaris yang aman untuk ibu hamil adalah?", "o": ["Benzoil peroksida", "Isotretinoin oral", "Tetrasiklin", "Dapson oral", "Tretinoin topikal"], "a": "Benzoil peroksida", "skdi": "4A", "e": "Benzoil peroksida relatif aman pada kehamilan. Retinoid (isotretinoin/tretinoin) teratogenik, tetrasiklin menyebabkan kelainan tulang/gigi janin, dapson sebaiknya dihindari.", "n": "Amygdala no.85 / Ascendens no.63"},
+{"t": "Vesikobulosa", "q": "Perempuan 24 tahun dengan keluhan kambuhan pada siku, lutut, dan badan; papul dengan vesikel di puncaknya, kadang hemoragi/ekskoriasi dan krusta; histopatologi: vesikel subepidermal pada papila dermis. Apakah diagnosisnya?", "o": ["Dermatitis herpetiformis", "Pemfigus vulgaris", "Pemfigoid bulosa", "Pemfigus foliaseus", "Epidermolisis bulosa"], "a": "Dermatitis herpetiformis", "skdi": "3A", "e": "Vesikel berkelompok sangat gatal di ekstensor (siku, lutut, bokong) dengan mikroabses neutrofil di papila dermis dan vesikel subepidermal khas dermatitis herpetiformis (terkait penyakit celiac). Pemfigus akantolisis intraepidermal; pemfigoid bula tegang.", "n": "Arthron 18 no.3 / Aorta 19 no.37"},
+{"t": "Farmakologi", "q": "Manakah contoh obat antihistamin penghambat reseptor H2?", "o": ["Cimetidine", "Astemizole", "Levocetirizine", "Loratadine", "Terfenadine"], "a": "Cimetidine", "skdi": "— (farmakologi)", "e": "Cimetidine adalah antagonis reseptor H2. Astemizole, levocetirizine, loratadine, dan terfenadine adalah antagonis H1.", "n": "Aorta 19 no.36 / Arthron 18 no.11"},
+{"t": "Vesikobulosa", "q": "Apakah pemeriksaan penunjang gold standard untuk dermatitis herpetiformis?", "o": ["Direct immunofluorescence kulit perilesi (deposit IgA granular)", "Tzanck smear", "KOH 10%", "Pewarnaan Gram", "Kultur Sabouraud"], "a": "Direct immunofluorescence kulit perilesi (deposit IgA granular)", "skdi": "3A", "e": "DIF dari kulit normal perilesi menunjukkan deposit IgA granular di papila dermis, merupakan baku diagnostik DH. Tzanck untuk herpes, KOH untuk jamur, Gram untuk bakteri, kultur untuk jamur.", "n": "Amygdala no.40 / Ascendens no.63"},
+{"t": "IMS", "q": "Wanita 32 tahun, pekerja hiburan malam dengan duh tubuh; gambaran mikroskopis tampak diplokokus seperti biji kopi intraseluler. Bakteri apakah yang menginfeksi?", "o": ["Neisseria gonorrhoeae", "Treponema pallidum", "Haemophilus ducreyi", "Chlamydia trachomatis", "Gardnerella vaginalis"], "a": "Neisseria gonorrhoeae", "skdi": "4A", "e": "Diplokokus Gram negatif intraseluler menyerupai biji kopi khas Neisseria gonorrhoeae. Treponema spiroketa, Haemophilus ducreyi school of fish, Chlamydia intraseluler obligat tanpa gambaran biji kopi.", "n": "Ascendens no.63"},
+{"t": "IMS", "q": "Wanita 32 tahun, pekerja hiburan malam dengan duh tubuh. Apakah gambaran mikroskopis yang khas pada pewarnaan Gram?", "o": ["Coffee bean appearance (diplokokus intraseluler)", "School of fish", "Clue cell", "Multinucleated giant cell", "Spaghetti and meatball"], "a": "Coffee bean appearance (diplokokus intraseluler)", "skdi": "4A", "e": "Gonore menunjukkan diplokokus Gram negatif intraseluler (coffee bean). School of fish khas chancroid, clue cell vaginosis bakterial, multinucleated giant cell herpes, spaghetti and meatball tinea versikolor.", "n": "Ascendens no.72 / Anthelix no.13"},
+{"t": "Pigmentasi", "q": "Untuk menilai kedalaman pigmen melasma (epidermal, dermal, atau campuran), pemeriksaan yang dilakukan adalah?", "o": ["Pemeriksaan lampu Wood", "Pemeriksaan KOH", "Patch test", "Tzanck test", "Diaskopi"], "a": "Pemeriksaan lampu Wood", "skdi": "4A", "e": "Lampu Wood membantu membedakan tipe melasma; tipe epidermal makin kontras, tipe dermal tidak. KOH untuk jamur, patch test untuk dermatitis kontak, Tzanck untuk virus, diaskopi untuk membedakan eritema vs purpura.", "n": "Ascendens no.82 / Amygdala no.39"},
+{"t": "Vesikobulosa", "q": "Laki-laki 60 tahun dengan plenting/lepuh besar tegang berisi cairan kadang darah di lipatan dan tungkai, terasa gatal; Nikolsky (-). Apakah diagnosis yang tepat?", "o": ["Pemfigoid bulosa", "Pemfigus vulgaris", "Dermatitis herpetiformis", "Impetigo bulosa", "Eritema multiforme"], "a": "Pemfigoid bulosa", "skdi": "3A", "e": "Bula tegang besar pada usia lanjut dengan Nikolsky (-) dan bula subepidermal khas pemfigoid bulosa. Pemfigus bula kendur Nikolsky (+), DH vesikel kecil sangat gatal, impetigo bulosa pada anak.", "n": "Aorta 19 no.43 / Amygdala no.69"},
+{"t": "IMS", "q": "Untuk menegakkan diagnosis sifilis stadium dini dengan pemeriksaan langsung, metode yang digunakan adalah?", "o": ["Mikroskop lapangan gelap", "Pewarnaan Gram", "KOH 10%", "Tzanck test", "Kultur Sabouraud"], "a": "Mikroskop lapangan gelap", "skdi": "3A", "e": "Treponema pallidum tidak terwarnai Gram dan sulit dikultur; pemeriksaan lapangan gelap menampilkan spiroketa bergerak (gambaran bintang jatuh). KOH untuk jamur, Tzanck untuk herpes.", "n": "Anthelix no.10 / Ascendens no.72"},
+{"t": "UKK", "q": "Penebalan stratum korneum (lapisan tanduk) yang berlebihan disebut?", "o": ["Hiperkeratosis", "Akantosis", "Papilomatosis", "Spongiosis", "Parakeratosis"], "a": "Hiperkeratosis", "skdi": "— (histopatologi)", "e": "Hiperkeratosis adalah penebalan stratum korneum. Akantosis penebalan stratum spinosum, papilomatosis pemanjangan papila dermis, spongiosis edema interseluler, parakeratosis retensi inti pada stratum korneum.", "n": "Amygdala no.27 / Aorta 19 no.63"},
+{"t": "TB Kulit", "q": "Untuk skrofuloderma, pemeriksaan penunjang yang paling tepat untuk menegakkan diagnosis adalah?", "o": ["Biopsi dan histopatologi", "KOH 10%", "Patch test", "Lampu Wood", "Tzanck test"], "a": "Biopsi dan histopatologi", "skdi": "3A", "e": "Skrofuloderma ditegakkan dengan biopsi/histopatologi yang menampilkan granuloma tuberkuloid (dan kultur M. tuberculosis). KOH/lampu Wood/Tzanck/patch test bukan untuk TB kulit.", "n": "Aorta 19 no.46 / Amygdala no.42"},
+{"t": "IMS", "q": "Wanita dengan duh tubuh berwarna kuning kehijauan berbuih, gatal, dan serviks tampak kemerahan berbintik (strawberry cervix). Apakah penyebabnya?", "o": ["Trichomonas vaginalis", "Candida albicans", "Gardnerella vaginalis", "Neisseria gonorrhoeae", "Chlamydia trachomatis"], "a": "Trichomonas vaginalis", "skdi": "4A", "e": "Duh kuning-hijau berbuih dengan strawberry cervix khas trikomoniasis (Trichomonas vaginalis). Candida duh seperti susu pecah, Gardnerella duh abu-abu amis, gonore duh purulen, klamidia sering asimtomatik.", "n": "Axon 20 no.5 / Ascendens no.81"},
+{"t": "Erupsi Obat", "q": "Laki-laki 40 tahun dengan lepuh dan erosi luas di kulit dan mukosa setelah minum obat; epidermolisis mengenai sekitar 40% luas tubuh. Apakah diagnosis yang tepat?", "o": ["Toxic epidermal necrolysis", "Stevens-Johnson syndrome", "SJS-TEN overlap", "Eritema multiforme minor", "Staphylococcal scalded skin syndrome"], "a": "Toxic epidermal necrolysis", "skdi": "3B", "e": "Epidermolisis >30% luas tubuh diklasifikasikan TEN; SJS <10%, overlap 10-30%. Eritema multiforme minor tanpa keterlibatan mukosa luas, SSSS akibat toksin stafilokokus pada anak.", "n": "Kuis Pekan 4 no.5 / Aorta 19 no.61"},
+{"t": "Mikosis", "q": "Pasien dengan tinea unguium (onikomikosis) pada beberapa kuku. Apakah terapi yang paling tepat?", "o": ["Antijamur sistemik oral", "Antijamur topikal saja", "Antibiotik oral", "Kortikosteroid topikal", "Asam salisilat topikal"], "a": "Antijamur sistemik oral", "skdi": "4A", "e": "Onikomikosis memerlukan antijamur sistemik (terbinafin/itrakonazol) karena penetrasi topikal ke lempeng kuku buruk. Topikal saja kurang efektif kecuali lesi sangat terbatas. Antibiotik/steroid tidak tepat.", "n": "Kuis Pekan 4 no.4 / Aorta 19 no.38"},
+{"t": "Kelenjar Apokrin", "q": "Laki-laki 30 tahun dengan benjolan nyeri berulang di ketiak, sebagian pecah mengeluarkan nanah dan membentuk sinus/jaringan parut. Apakah diagnosis yang tepat?", "o": ["Hidradenitis supurativa", "Furunkulosis", "Skrofuloderma", "Limfadenitis", "Kista epidermoid"], "a": "Hidradenitis supurativa", "skdi": "3A", "e": "Nodul nyeri berulang dengan sinus dan jaringan parut di area kaya kelenjar apokrin (ketiak, inguinal) khas hidradenitis supurativa. Furunkel infeksi folikel akut, skrofuloderma terkait TB KGB, kista epidermoid tidak membentuk sinus multipel.", "n": "Aorta 19 no.62 / Amygdala no.20"},
+{"t": "Virologi", "q": "Pada herpes genitalis, pemeriksaan Tzanck (Giemsa) dari dasar vesikel menunjukkan?", "o": ["Sel datia berinti banyak", "Pseudohifa", "Diplokokus intraseluler", "Clue cell", "Badan Donovan"], "a": "Sel datia berinti banyak", "skdi": "4A", "e": "Tzanck smear pada infeksi herpes menampilkan multinucleated giant cell (sel datia berinti banyak). Pseudohifa untuk kandida, diplokokus untuk gonore, clue cell untuk vaginosis, badan Donovan untuk granuloma inguinale.", "n": "Amygdala no.39"},
+{"t": "Dermatitis", "q": "Anak 2 tahun dengan ruam merah gatal berulang di lipat siku dan lutut; riwayat asma dan rinitis pada keluarga. Apakah dasar reaksi imunologi pada dermatitis atopik?", "o": ["Hipersensitivitas tipe I", "Hipersensitivitas tipe II", "Hipersensitivitas tipe III", "Hipersensitivitas tipe IV", "Reaksi autoimun terhadap desmoglein"], "a": "Hipersensitivitas tipe I", "skdi": "4A", "e": "Dermatitis atopik berhubungan dengan hipersensitivitas tipe I (IgE) dan atopi (asma, rinitis). Tipe IV pada dermatitis kontak alergi, tipe II/III pada penyakit lain, autoantibodi desmoglein pada pemfigus.", "n": "Ascendens no.101 / Aorta 19 no.100"},
+{"t": "Pigmentasi", "q": "Tata laksana topikal lini untuk melasma yang menghambat tirosinase adalah?", "o": ["Hidrokuinon 2%", "Permetrin 5%", "Mupirosin 2%", "Asiklovir 5%", "Griseofulvin"], "a": "Hidrokuinon 2%", "skdi": "4A", "e": "Hidrokuinon menghambat tirosinase sehingga mengurangi melanogenesis pada melasma (sering dikombinasi tretinoin dan kortikosteroid). Permetrin antiparasit, mupirosin antibiotik, asiklovir antivirus, griseofulvin antijamur.", "n": "Ascendens no.50"},
+{"t": "Mikosis", "q": "Laki-laki 18 tahun dengan bercak putih kekuningan bersisik halus di punggung, makin jelas saat berkeringat. KOH menunjukkan hifa pendek dan spora bergerombol. Apakah diagnosis yang tepat?", "o": ["Pitiriasis versikolor", "Tinea korporis", "Pitiriasis alba", "Vitiligo", "Morbus Hansen"], "a": "Pitiriasis versikolor", "skdi": "4A", "e": "Gambaran spaghetti and meatballs (hifa pendek + spora bergerombol) khas pitiriasis versikolor (Malassezia). Tinea korporis hifa panjang bersepta, pitiriasis alba tanpa jamur, vitiligo depigmentasi tanpa skuama, kusta disertai anestesi.", "n": "Amygdala no.84 / Aorta 19 no.11"},
+{"t": "Parasit", "q": "Cutaneous larva migrans paling sering disebabkan oleh larva cacing?", "o": ["Ancylostoma braziliense", "Ascaris lumbricoides", "Enterobius vermicularis", "Sarcoptes scabiei", "Pediculus humanus"], "a": "Ancylostoma braziliense", "skdi": "4A", "e": "CLM (creeping eruption) tersering akibat larva Ancylostoma braziliense (cacing tambang hewan). Ascaris dan Enterobius cacing usus manusia, Sarcoptes penyebab skabies, Pediculus penyebab pedikulosis.", "n": "Ascendens no.50 / Aorta 19 no.96"},
+{"t": "Bakteriologi", "q": "Pada pewarnaan Ziehl-Neelsen, Mycobacterium tuberculosis tampak merah dan tahan asam karena dinding selnya kaya akan?", "o": ["Asam mikolat", "Peptidoglikan tebal", "Lipopolisakarida", "Asam teikoat", "Kapsul polisakarida"], "a": "Asam mikolat", "skdi": "— (mikrobiologi)", "e": "Sifat tahan asam Mycobacterium disebabkan kandungan asam mikolat pada dinding sel sehingga tampak merah pada pewarnaan ZN. Komponen lain bukan penyebab sifat tahan asam.", "n": "Aorta 19 no.2"},
+{"t": "Keislaman", "q": "Ayat yang menjelaskan kulit manusia akan menjadi saksi atas perbuatannya di akhirat terdapat pada surah?", "o": ["Fussilat: 20-21", "Al-Isra: 32", "An-Nur: 30", "Al-Ahzab: 59", "Al-Baqarah: 222"], "a": "Fussilat: 20-21", "skdi": "— (keislaman)", "e": "QS Fussilat ayat 20-21 menyebutkan kulit menjadi saksi. Al-Isra 32 tentang larangan zina, An-Nur 30 menundukkan pandangan, Al-Ahzab 59 perintah jilbab.", "n": "Amygdala no.14 / Aorta 19 no.76"},
+{"t": "Kusta", "q": "Sel target utama yang diinfeksi oleh Mycobacterium leprae adalah?", "o": ["Sel Schwann", "Sel Langerhans", "Melanosit", "Keratinosit", "Sel mast"], "a": "Sel Schwann", "skdi": "4A", "e": "M. leprae memiliki tropisme terhadap sel Schwann saraf perifer sehingga timbul gangguan sensorik/motorik. Sel lain bukan target utama kuman ini.", "n": "Anthelix no.70"},
+{"t": "Bakteriologi", "q": "Regimen Obat Anti Tuberkulosis fase intensif (2 bulan pertama) yang tepat adalah?", "o": ["Rifampisin, isoniazid, pirazinamid, etambutol", "Rifampisin dan isoniazid saja", "Isoniazid dan etambutol", "Streptomisin dan pirazinamid", "Rifampisin, dapson, klofazimin, ofloksasin"], "a": "Rifampisin, isoniazid, pirazinamid, etambutol", "skdi": "4A", "e": "Fase intensif TB selama 2 bulan menggunakan RHZE (rifampisin, isoniazid, pirazinamid, etambutol), dilanjutkan fase lanjutan RH. Regimen dapson-klofazimin-ofloksasin untuk kusta.", "n": "Ascendens no.23 / Amygdala no.7"},
+{"t": "Mikosis", "q": "Anak 8 tahun dengan bercak kebotakan disertai rambut patah dan skuama abu-abu (grey patch); berkontak dengan kucing. Apakah pemeriksaan penunjang sederhana awal yang tepat?", "o": ["KOH 10-20%", "Pewarnaan Gram", "Tzanck test", "Patch test", "Diaskopi"], "a": "KOH 10-20%", "skdi": "4A", "e": "Grey patch tinea kapitis dapat diskrining cepat dengan KOH untuk melihat hifa/artrospora; konfirmasi dengan kultur Sabouraud. Gram untuk bakteri, Tzanck untuk virus, patch test untuk dermatitis kontak.", "n": "Amygdala no.29 / Arthron 18 no.22"},
+{"t": "Bakteriologi", "q": "Pada pemeriksaan apusan, ditemukan bakteri seperti school of fish (berderet). Bakteri apakah ini?", "o": ["Haemophilus ducreyi", "Neisseria gonorrhoeae", "Treponema pallidum", "Klebsiella granulomatis", "Gardnerella vaginalis"], "a": "Haemophilus ducreyi", "skdi": "4A", "e": "Gambaran school of fish/railroad track khas Haemophilus ducreyi penyebab ulkus molle. Neisseria diplokokus biji kopi, Treponema spiroketa, Klebsiella granulomatis badan Donovan.", "n": "Aorta 19 no.72 / Anthelix no.32"},
+{"t": "Dermatitis", "q": "Laki-laki dengan kulit leher menebal, garis kulit makin jelas (likenifikasi) akibat sering digaruk karena gatal hebat menahun. Apakah diagnosis yang tepat?", "o": ["Liken simpleks kronik", "Psoriasis", "Dermatitis numularis", "Dermatitis seboroik", "Liken planus"], "a": "Liken simpleks kronik", "skdi": "4A", "e": "Likenifikasi akibat garukan kronis pada satu area khas liken simpleks kronik (neurodermatitis), dipicu stres psikis. Psoriasis skuama mikaseus, dermatitis numularis lesi koin, seboroik area berminyak, liken planus papul ungu.", "n": "Arthron 18 no.31 / Aorta 19 no.11"},
+{"t": "Pioderma", "q": "Etiologi tersering impetigo (krustosa maupun bulosa) adalah?", "o": ["Staphylococcus aureus", "Streptococcus viridans", "Pseudomonas aeruginosa", "Escherichia coli", "Corynebacterium minutissimum"], "a": "Staphylococcus aureus", "skdi": "4A", "e": "Impetigo paling sering disebabkan Staphylococcus aureus (impetigo krustosa juga oleh Streptococcus pyogenes). Pseudomonas, E. coli, dan Corynebacterium bukan penyebab khas impetigo.", "n": "Arthron 18 no.24 / Amygdala no.87"},
+{"t": "UKK", "q": "Penumpukan jaringan ikat fibrosa sehingga kulit tampak keras dan mengkilat disebut?", "o": ["Sklerosis", "Likenifikasi", "Atrofi", "Erosi", "Eskar"], "a": "Sklerosis", "skdi": "— (UKK)", "e": "Sklerosis adalah pengerasan kulit akibat penumpukan jaringan ikat (mis. pada skleroderma). Likenifikasi penebalan dengan garis kulit jelas, atrofi penipisan, erosi defek superfisial, eskar jaringan nekrotik.", "n": "Anthelix no.4"},
+{"t": "Dermatitis", "q": "Seorang pasien dengan vesikel kecil dalam (deep seated) yang sangat gatal pada telapak tangan dan sisi jari, kambuhan. Apakah diagnosis yang tepat?", "o": ["Dishidrosis (pompholyx)", "Skabies", "Tinea manus", "Psoriasis pustulosa", "Dermatitis numularis"], "a": "Dishidrosis (pompholyx)", "skdi": "4A", "e": "Vesikel dalam menyerupai butiran sagu sangat gatal di telapak tangan/sisi jari khas dishidrosis (pompholyx). Skabies di sela jari dengan terowongan, tinea manus KOH (+), psoriasis pustulosa berisi pus steril, numularis berbentuk koin.", "n": "Anthelix no.5 / Aorta 19 no.20"},
+{"t": "COVID/Fotobiologi", "q": "Manifestasi kulit pada COVID-19 berat (chilblain-like/akral) terutama disebabkan oleh mekanisme?", "o": ["Mikroangiopati dan trombosis pembuluh kecil", "Reaksi alergi tipe I", "Infeksi jamur sekunder", "Defisiensi vitamin D", "Reaksi autoimun terhadap desmoglein"], "a": "Mikroangiopati dan trombosis pembuluh kecil", "skdi": "— (patofisiologi)", "e": "Lesi akral/chilblain dan livedo pada COVID-19 dikaitkan dengan mikroangiopati, kerusakan endotel, dan trombosis pembuluh kecil. Bukan reaksi alergi tipe I, infeksi jamur, defisiensi vitamin D, atau autoimun desmoglein.", "n": "Aorta 19 no.34 / Amygdala no.80"},
+{"t": "Mikosis", "q": "Etiologi dermatitis seboroik berhubungan dengan proliferasi jamur?", "o": ["Malassezia furfur", "Trichophyton rubrum", "Candida albicans", "Microsporum canis", "Epidermophyton floccosum"], "a": "Malassezia furfur", "skdi": "4A", "e": "Dermatitis seboroik terkait pertumbuhan Malassezia (Pityrosporum) pada area kaya sebum. Trichophyton, Microsporum, dan Epidermophyton penyebab dermatofitosis; Candida penyebab kandidiasis.", "n": "Amygdala no.78"},
+{"t": "Kusta", "q": "Tujuan utama pemberian Multi Drug Therapy (MDT) pada kusta adalah?", "o": ["Mencegah resistensi dan kekambuhan", "Menghilangkan gatal", "Mengobati reaksi alergi", "Memutihkan bercak", "Menurunkan demam"], "a": "Mencegah resistensi dan kekambuhan", "skdi": "4A", "e": "MDT mengombinasikan beberapa obat untuk mencegah resistensi M. leprae sekaligus menurunkan kekambuhan dan memutus penularan. Bukan untuk gatal, alergi, memutihkan bercak, atau demam.", "n": "Anthelix no.12 / Arthron 18 no.46"},
+{"t": "Kelenjar Ekrin", "q": "Keringat berlebih yang dipicu emosi (marah, gugup, malu) akibat hiperaktivitas kelenjar?", "o": ["Kelenjar ekrin", "Kelenjar apokrin", "Kelenjar sebasea", "Kelenjar Meibom", "Kelenjar mammae"], "a": "Kelenjar ekrin", "skdi": "— (fisiologi)", "e": "Hiperhidrosis emosional dimediasi kelenjar ekrin (persarafan kolinergik). Kelenjar apokrin terkait bau badan, sebasea menghasilkan sebum, Meibom di kelopak mata, mammae kelenjar susu.", "n": "Anthelix no.77 / Ascendens no.21"},
+{"t": "Virologi", "q": "Patofisiologi herpes zoster adalah?", "o": ["Reaktivasi virus varisela-zoster laten di ganglion", "Infeksi primer virus varisela", "Reaktivasi HSV-2", "Infeksi bakteri sekunder", "Reaksi autoimun"], "a": "Reaktivasi virus varisela-zoster laten di ganglion", "skdi": "4A", "e": "Herpes zoster terjadi akibat reaktivasi VZV laten di ganglion sensorik (dorsal root). Infeksi primer VZV adalah varisela. HSV-2 menyebabkan herpes genitalis.", "n": "Amygdala no.56 / Anthelix no.16"},
+{"t": "UKK", "q": "Retakan linier pada kulit yang menembus epidermis hingga dermis, sering di telapak kaki, disebut?", "o": ["Fisura", "Erosi", "Ulkus", "Ekskoriasi", "Sinus"], "a": "Fisura", "skdi": "— (UKK)", "e": "Fisura adalah celah/retakan linier pada kulit. Erosi defek epidermis superfisial, ulkus defek melewati membrana basalis, ekskoriasi akibat garukan, sinus saluran ke rongga supuratif.", "n": "Aorta 19 no.79 / Anthelix no.19"},
+{"t": "Keislaman", "q": "Perintah bagi perempuan beriman untuk mengulurkan jilbabnya ke seluruh tubuh terdapat pada surah?", "o": ["Al-Ahzab: 59", "Al-Isra: 32", "Fussilat: 20", "An-Nur: 31", "Al-Baqarah: 222"], "a": "Al-Ahzab: 59", "skdi": "— (keislaman)", "e": "QS Al-Ahzab ayat 59 memerintahkan mengulurkan jilbab. An-Nur 31 tentang menjaga pandangan dan menutup dada, Al-Isra 32 larangan zina, Fussilat 20 kulit jadi saksi.", "n": "Ascendens no.30 / Aorta 19 no.9"},
+{"t": "Farmakologi", "q": "Seorang sopir taksi alergi udang membutuhkan antihistamin yang tidak menyebabkan kantuk. Pilihan yang tepat adalah?", "o": ["Loratadine", "Chlorpheniramine", "Difenhidramin", "Prometazin", "Hidroksizin"], "a": "Loratadine", "skdi": "— (farmakologi)", "e": "Loratadine adalah antihistamin generasi kedua non-sedatif, cocok untuk yang perlu tetap waspada. CTM, difenhidramin, prometazin, dan hidroksizin generasi pertama yang sedatif.", "n": "Anthelix no.25 / Arthron 18 no.11"},
+{"t": "Parasit", "q": "Stadium larva cacing tambang yang infektif dan mampu menembus kulit pada cutaneous larva migrans adalah?", "o": ["Larva filariform", "Larva rhabditiform", "Telur berembrio", "Cacing dewasa", "Mikrofilaria"], "a": "Larva filariform", "skdi": "4A", "e": "Larva filariform (stadium L3) adalah bentuk infektif yang menembus kulit. Rhabditiform belum infektif, telur dan cacing dewasa tidak menembus kulit, mikrofilaria terkait filariasis.", "n": "Ascendens no.50 / Anthelix no.31"},
+{"t": "IMS", "q": "Tata laksana trikomoniasis pada pasien tidak hamil adalah?", "o": ["Metronidazol 2 gram dosis tunggal", "Doksisiklin 100 mg dua kali sehari 7 hari", "Sefiksim 400 mg dosis tunggal", "Flukonazol 150 mg dosis tunggal", "Benzatin penisilin 2,4 juta unit"], "a": "Metronidazol 2 gram dosis tunggal", "skdi": "4A", "e": "Trikomoniasis diterapi metronidazol 2 g dosis tunggal (atau 2x500 mg 7 hari), pasangan diobati bersama. Doksisiklin untuk klamidia, sefiksim untuk gonore, flukonazol untuk kandida, benzatin penisilin untuk sifilis.", "n": "Anthelix no.34 / Ascendens no.50"},
+{"t": "Kusta", "q": "Regimen MDT kusta tipe paucibasiler (PB) dewasa adalah?", "o": ["Rifampisin 600 mg/bulan dan dapson 100 mg/hari selama 6 bulan", "Rifampisin 600 mg/bulan, klofazimin 300 mg/bulan, klofazimin 50 mg/hari, dapson 100 mg/hari", "Dapson 100 mg/hari saja selama 12 bulan", "Rifampisin 450 mg/bulan dan ofloksasin 400 mg/hari", "Klofazimin 50 mg/hari saja selama 6 bulan"], "a": "Rifampisin 600 mg/bulan dan dapson 100 mg/hari selama 6 bulan", "skdi": "4A", "e": "MDT-PB dewasa: rifampisin 600 mg/bulan (diawasi) + dapson 100 mg/hari selama 6 bulan. Regimen dengan klofazimin adalah MDT-MB selama 12 bulan.", "n": "Ascendens no.23 / Amygdala no.107"},
+{"t": "Vitiligo", "q": "Anak dengan bercak putih susu berbatas tegas di wajah, tanpa skuama dan tanpa anestesi; pemeriksaan KOH negatif. Apakah dasar penyebab penyakit ini?", "o": ["Autoimun terhadap melanosit", "Infeksi jamur superfisial", "Infeksi Mycobacterium leprae", "Reaksi alergi obat", "Defisiensi vitamin D"], "a": "Autoimun terhadap melanosit", "skdi": "3A", "e": "Vitiligo adalah depigmentasi akibat destruksi autoimun melanosit. Berbeda dari pitiriasis versikolor/tinea (jamur), kusta (anestesi + penebalan saraf), dan erupsi obat.", "n": "Amygdala no.112 / Aorta 19 no.50"},
+{"t": "Vitiligo", "q": "Tata laksana topikal lini untuk vitiligo terlokalisir (selain kortikosteroid) adalah?", "o": ["Takrolimus", "Permetrin", "Mupirosin", "Asiklovir", "Griseofulvin"], "a": "Takrolimus", "skdi": "3A", "e": "Inhibitor kalsineurin topikal seperti takrolimus efektif untuk vitiligo, terutama di wajah, sebagai alternatif/kombinasi kortikosteroid. Permetrin antiparasit, mupirosin antibiotik, asiklovir antivirus, griseofulvin antijamur.", "n": "Ascendens no.50"},
+{"t": "Virologi", "q": "Tata laksana utama campak (morbili) tanpa komplikasi pada anak adalah?", "o": ["Suplementasi vitamin A", "Pemberian asiklovir", "Antibiotik rutin", "Kortikosteroid sistemik", "Antijamur oral"], "a": "Suplementasi vitamin A", "skdi": "4A", "e": "WHO merekomendasikan vitamin A pada campak untuk menurunkan morbiditas dan mortalitas, disertai terapi suportif. Asiklovir tidak untuk campak, antibiotik hanya bila ada infeksi sekunder, kortikosteroid/antijamur tidak diindikasikan.", "n": "Ascendens no.50"},
+{"t": "Bakteriologi", "q": "Pitted keratolysis ditandai lubang-lubang dangkal pada telapak kaki dengan bau tidak sedap. Tata laksana topikal yang tepat adalah?", "o": ["Aluminium klorida 20%", "Hidrokuinon 2%", "Permetrin 5%", "Asiklovir 5%", "Nistatin"], "a": "Aluminium klorida 20%", "skdi": "4A", "e": "Pitted keratolysis (Kytococcus/Corynebacterium pada kondisi lembap) ditangani dengan mengurangi kelembapan (aluminium klorida 20%) plus antibiotik topikal seperti eritromisin/klindamisin. Hidrokuinon untuk pigmentasi, permetrin antiparasit, asiklovir antivirus, nistatin antijamur.", "n": "Anthelix no.55 / Aorta 19 no.45"},
+{"t": "IMS", "q": "Tata laksana sifilis stadium dini (primer/sekunder) yang tepat adalah?", "o": ["Benzatin penisilin G 2,4 juta unit injeksi intramuskular dosis tunggal", "Doksisiklin 50 mg dosis tunggal", "Metronidazol 2 gram dosis tunggal", "Asiklovir 400 mg tiga kali sehari", "Flukonazol 150 mg dosis tunggal"], "a": "Benzatin penisilin G 2,4 juta unit injeksi intramuskular dosis tunggal", "skdi": "4A", "e": "Sifilis dini diterapi benzatin penisilin G 2,4 juta unit IM dosis tunggal (doksisiklin 2x100 mg 14 hari bila alergi penisilin). Metronidazol untuk trikomoniasis, asiklovir untuk herpes, flukonazol untuk kandida.", "n": "Anthelix no.34"},
+{"t": "Tumor Kulit", "q": "Laki-laki 60 tahun petani dengan benjolan di pipi, tepi meninggi seperti mutiara, ada telangiektasis, mudah berdarah, tengah cekung. Apakah diagnosis yang tepat?", "o": ["Karsinoma sel basal", "Karsinoma sel skuamosa", "Melanoma maligna", "Keratosis seboroik", "Nevus pigmentosus"], "a": "Karsinoma sel basal", "skdi": "2", "e": "Nodul dengan pearly border, telangiektasis, dan ulserasi sentral (rodent ulcer) khas karsinoma sel basal pada area terpapar matahari. KSS membentuk mutiara tanduk dan dapat metastasis; melanoma lesi berpigmen asimetris; keratosis seboroik dan nevus jinak.", "n": "Amygdala no.104 / Anthelix no.57"},
+{"t": "Tumor Kulit", "q": "Gambaran histopatologi mutiara tanduk (horn pearl/keratin pearl) merupakan ciri khas dari?", "o": ["Karsinoma sel skuamosa", "Karsinoma sel basal", "Melanoma maligna", "Limfoma kutis", "Sarkoma Kaposi"], "a": "Karsinoma sel skuamosa", "skdi": "2", "e": "Keratin/horn pearl adalah ciri histopatologi karsinoma sel skuamosa. Karsinoma sel basal menunjukkan palisading perifer, melanoma sel atipik berpigmen, limfoma dan sarkoma Kaposi gambaran berbeda.", "n": "Anthelix no.76 / Axon 20 no.22"},
+{"t": "Kelenjar Ekrin", "q": "Bayi 9 bulan dengan bintik merah dan vesikel kecil di leher dan dada saat cuaca panas dan banyak berkeringat. Apakah diagnosis yang tepat?", "o": ["Miliaria rubra", "Miliaria kristalina", "Dermatitis atopik", "Kandidiasis intertriginosa", "Folikulitis"], "a": "Miliaria rubra", "skdi": "4A", "e": "Papulovesikel eritem akibat obstruksi duktus ekrin di lapisan lebih dalam dengan inflamasi khas miliaria rubra. Miliaria kristalina berupa vesikel jernih superfisial tanpa eritem. Dermatitis atopik di lipatan, kandidiasis dengan lesi satelit, folikulitis pustul folikular.", "n": "Axon 20 no.9 / Amygdala no.70"},
+{"t": "Kelenjar Ekrin", "q": "Tata laksana yang tepat untuk miliaria rubra adalah?", "o": ["Lotion kalamin dan kortikosteroid topikal ringan", "Antibiotik oral", "Antijamur sistemik", "Asiklovir topikal", "Permetrin 5%"], "a": "Lotion kalamin dan kortikosteroid topikal ringan", "skdi": "4A", "e": "Miliaria rubra ditangani dengan mendinginkan dan menghindari panas berlebih, lotion kalamin, dan kortikosteroid topikal ringan bila perlu. Antibiotik/antijamur/antivirus/antiparasit tidak diindikasikan.", "n": "Aorta 19 no.38 / Ascendens no.50"},
+{"t": "Dermatitis", "q": "Perempuan 30 tahun dengan papul dan pustul eritem di sekitar mulut, ada zona kulit normal di tepi bibir; riwayat pemakaian kortikosteroid topikal dan kosmetik. Apakah diagnosis yang tepat?", "o": ["Dermatitis perioral", "Akne vulgaris", "Rosasea", "Dermatitis kontak alergi", "Impetigo"], "a": "Dermatitis perioral", "skdi": "4A", "e": "Papulopustul perioral dengan clear zone di sekitar vermilion dan pencetus steroid topikal khas dermatitis perioral. Akne ada komedo, rosasea di sentral wajah dengan flushing, DKA terkait alergen, impetigo berkrusta madu.", "n": "Amygdala no.52 / Anthelix no.78"},
+{"t": "Tumor Kulit", "q": "Nenek 65 tahun, petani, dengan papul/plak verukosa coklat-hitam tampak seperti menempel (stuck-on) di wajah dan punggung, permukaan berminyak. Apakah diagnosis yang tepat?", "o": ["Keratosis seboroik", "Karsinoma sel basal", "Melanoma maligna", "Veruka vulgaris", "Nevus pigmentosus"], "a": "Keratosis seboroik", "skdi": "2", "e": "Lesi stuck-on verukosa berpigmen pada lansia khas keratosis seboroik (jinak). Karsinoma sel basal pearly border, melanoma asimetris berubah, veruka vulgaris kutil kasar, nevus tahi lalat.", "n": "Amygdala no.21 / Aorta 19 no.15"},
+{"t": "Virologi", "q": "Anak dengan papul kecil seperti kubah, di tengahnya cekung (umbilikasi/delle), berisi massa putih. Apakah diagnosis yang tepat?", "o": ["Moluskum kontagiosum", "Veruka vulgaris", "Varisela", "Milia", "Folikulitis"], "a": "Moluskum kontagiosum", "skdi": "4A", "e": "Papul dome-shaped dengan umbilikasi sentral berisi badan moluskum khas moluskum kontagiosum (poxvirus). Veruka kutil kasar, varisela vesikel berdasar eritem, milia kista keratin kecil, folikulitis pustul folikular.", "n": "Amygdala no.110 / Aorta 19 no.74"},
+{"t": "Kelainan Rambut", "q": "Laki-laki muda dengan satu bercak kebotakan bulat berbatas tegas, kulit kepala tampak normal dan licin tanpa skuama, ditemukan rambut seperti tanda seru di tepi. Apakah diagnosis yang tepat?", "o": ["Alopecia areata", "Tinea kapitis", "Alopecia androgenik", "Trikotilomania", "Telogen effluvium"], "a": "Alopecia areata", "skdi": "2", "e": "Patch botak berbatas tegas dengan kulit normal dan exclamation mark hair khas alopecia areata (autoimun). Tinea kapitis disertai skuama/rambut patah dengan KOH positif, androgenik pola bertahap, trikotilomania akibat menarik rambut, telogen effluvium difus.", "n": "Amygdala no.31 / Aorta 19 no.56"},
+{"t": "Urtikaria", "q": "Mahasiswa mengeluh biduran muncul saat suhu tubuh meningkat, berolahraga, mandi air panas, atau emosi; lesi kecil dikelilingi eritema. Apakah jenis urtikaria ini?", "o": ["Urtikaria kolinergik", "Urtikaria dingin", "Urtikaria akibat tekanan", "Dermografisme", "Urtikaria kontak"], "a": "Urtikaria kolinergik", "skdi": "4A", "e": "Urtikaria kolinergik dipicu peningkatan suhu inti tubuh (olahraga, mandi panas, emosi) dengan wheal kecil dikelilingi flare. Urtikaria dingin oleh paparan dingin, pressure urticaria oleh tekanan, dermografisme oleh goresan.", "n": "Aorta 19 no.52"},
+{"t": "Urtikaria", "q": "Tata laksana lini pertama urtikaria akut adalah?", "o": ["Antihistamin H1 generasi kedua", "Kortikosteroid sistemik jangka panjang", "Antibiotik oral", "Antijamur sistemik", "Adrenalin intramuskular rutin"], "a": "Antihistamin H1 generasi kedua", "skdi": "4A", "e": "Lini pertama urtikaria adalah antihistamin H1 non-sedatif generasi kedua. Kortikosteroid hanya jangka pendek pada kasus berat, antibiotik/antijamur tidak diindikasikan, adrenalin untuk anafilaksis/angioedema mengancam jiwa.", "n": "Ascendens no.50"},
+{"t": "Kelainan Kuku", "q": "Perempuan 40 tahun, sering mencuci, dengan lipatan kuku proksimal bengkak kemerahan menahun, kutikula hilang, beberapa kuku distrofik. Apakah diagnosis yang tepat?", "o": ["Paronikia kronik", "Paronikia akut", "Onikomikosis", "Psoriasis kuku", "Tinea unguium"], "a": "Paronikia kronik", "skdi": "4A", "e": "Radang lipatan kuku menahun dengan hilangnya kutikula pada pekerjaan basah khas paronikia kronik (sering Candida). Paronikia akut nyeri dan bernanah mendadak (S. aureus), onikomikosis/tinea unguium infeksi jamur lempeng kuku, psoriasis kuku ada pitting/oil spot.", "n": "Aorta 19 no.49 / Anthelix no.60"},
+{"t": "Dermatitis", "q": "Tukang cukur 50 tahun dengan kulit tungkai bawah menghitam, gatal, kulit menebal, dan tampak varises; berdiri lama setiap hari. Apakah diagnosis yang tepat?", "o": ["Dermatitis statis", "Dermatitis kontak alergi", "Dermatitis numularis", "Liken simpleks kronik", "Selulitis"], "a": "Dermatitis statis", "skdi": "4A", "e": "Hiperpigmentasi, gatal, dan perubahan kulit tungkai bawah dengan insufisiensi vena/varises khas dermatitis statis. DKA terkait alergen, numularis lesi koin, liken simpleks akibat garukan terlokalisir, selulitis infeksi akut dengan demam.", "n": "Aorta 19 no.29 / Axon 20 no.58"},
+{"t": "Erupsi Obat", "q": "Perempuan dengan makula keunguan berbatas tegas di bibir yang muncul di tempat yang sama setiap minum obat tertentu. Apakah dasar patogenesis fixed drug eruption?", "o": ["Hipersensitivitas tipe IV", "Hipersensitivitas tipe I", "Hipersensitivitas tipe II", "Hipersensitivitas tipe III", "Reaksi autoimun terhadap melanosit"], "a": "Hipersensitivitas tipe IV", "skdi": "4A", "e": "FDE diperantarai sel T memori CD8 di lokasi tetap sehingga termasuk reaksi tipe IV (lambat). Tipe I (IgE) pada urtikaria, tipe II/III pada penyakit lain, bukan autoimun melanosit.", "n": "Axon 20 no.37 / Arthron 18 no.45"},
+{"t": "Parasit", "q": "Laki-laki dengan gatal di area kemaluan, ditemukan kutu dan makula kebiruan (macula cerulea) di kulit. Apakah diagnosis yang tepat?", "o": ["Pedikulosis pubis", "Skabies", "Tinea kruris", "Kandidiasis", "Eritrasma"], "a": "Pedikulosis pubis", "skdi": "4A", "e": "Macula cerulea dan ditemukannya Phthirus pubis di rambut pubis khas pedikulosis pubis. Skabies dengan terowongan sela jari, tinea kruris bercak tepi aktif, kandidiasis lesi satelit, eritrasma coral red.", "n": "Anthelix no.49 / Aorta 19 no.42"},
+{"t": "TB Kulit", "q": "Skrofuloderma paling sering berasal dari penjalaran per kontinuitatum dari?", "o": ["Kelenjar getah bening", "Paru", "Tulang panjang", "Ginjal", "Usus"], "a": "Kelenjar getah bening", "skdi": "3A", "e": "Skrofuloderma terjadi akibat penjalaran langsung dari fokus TB di kelenjar getah bening (sering colli) ke kulit. Sumber lain mungkin (tulang/sendi) namun KGB adalah yang tersering.", "n": "Aorta 19 no.31"},
+{"t": "Erupsi Obat", "q": "Laki-laki 50 tahun dengan lepuh dan erosi pada mukosa mata, mulut, dan genital disertai lesi target setelah minum alopurinol; epidermolisis sekitar 8% luas tubuh. Apakah diagnosis yang tepat?", "o": ["Stevens-Johnson syndrome", "Toxic epidermal necrolysis", "SJS-TEN overlap", "Eritema multiforme minor", "Fixed drug eruption"], "a": "Stevens-Johnson syndrome", "skdi": "3B", "e": "Keterlibatan minimal dua mukosa dengan epidermolisis <10% setelah obat (alopurinol) khas SJS. TEN bila >30%, overlap 10-30%, eritema multiforme minor tanpa mukosa luas, FDE lesi lokal berulang.", "n": "Aorta 19 no.61 / Amygdala no.100"},
+{"t": "Virologi", "q": "Anak 5 tahun dengan plenting berair tersebar diawali demam, lesi berbagai stadium (vesikel, pustul, krusta) bersamaan. Apakah tata laksana antivirus jika diindikasikan?", "o": ["Asiklovir oral", "Griseofulvin oral", "Metronidazol oral", "Permetrin topikal", "Mupirosin topikal"], "a": "Asiklovir oral", "skdi": "4A", "e": "Varisela dapat diberi asiklovir terutama bila berisiko (remaja/dewasa, imunokompromais) selain terapi suportif. Griseofulvin antijamur, metronidazol antiprotozoa, permetrin antiparasit, mupirosin antibiotik.", "n": "Aorta 19 no.19"},
+{"t": "Kusta", "q": "Pasien kusta dengan ulkus pada telapak kaki dan kekuatan otot menurun. Berdasarkan klasifikasi cacat WHO, termasuk derajat berapa?", "o": ["Derajat 2", "Derajat 0", "Derajat 1", "Derajat 3", "Derajat 4"], "a": "Derajat 2", "skdi": "4A", "e": "Cacat derajat 2 bila terdapat kerusakan/deformitas yang terlihat (mis. ulkus, kelemahan otot, deformitas). Derajat 0 tanpa gangguan, derajat 1 ada anestesi tanpa deformitas terlihat. Derajat 3/4 tidak ada dalam klasifikasi WHO.", "n": "Aorta 19 no.22"},
+{"t": "Mikosis", "q": "Laki-laki dewasa dengan bercak gatal di lipat paha, tepi aktif meninggi dengan central healing, memberat saat berkeringat. Apakah tata laksana topikal yang tepat untuk tinea kruris?", "o": ["Krim ketokonazol", "Krim hidrokortison", "Krim mupirosin", "Krim asiklovir", "Krim permetrin"], "a": "Krim ketokonazol", "skdi": "4A", "e": "Tinea kruris diterapi antijamur topikal golongan azol seperti ketokonazol. Hidrokortison (steroid) memperparah jamur (tinea incognito), mupirosin antibiotik, asiklovir antivirus, permetrin antiparasit.", "n": "Aorta 19 no.69 / Kuis Pekan 3 no.1"},
+{"t": "IMS", "q": "Tata laksana lini pertama uretritis gonore tanpa komplikasi saat ini adalah?", "o": ["Ceftriaxone 250 mg intramuskular dosis tunggal", "Doksisiklin 100 mg dosis tunggal", "Metronidazol 2 gram dosis tunggal", "Penisilin prokain 600 ribu unit", "Flukonazol 150 mg dosis tunggal"], "a": "Ceftriaxone 250 mg intramuskular dosis tunggal", "skdi": "4A", "e": "Gonore diterapi sefalosporin (ceftriaxone IM) karena resistensi penisilin/kuinolon, sering ditambah terapi klamidia. Doksisiklin dosis tunggal tidak adekuat untuk gonore, metronidazol untuk trikomoniasis, flukonazol untuk kandida.", "n": "Anthelix no.50"},
+{"t": "IMS", "q": "Tata laksana herpes genitalis rekuren adalah?", "o": ["Asiklovir 5x200 mg per oral selama 5-7 hari", "Benzatin penisilin 2,4 juta unit dosis tunggal", "Metronidazol 2 gram dosis tunggal", "Doksisiklin 100 mg selama 7 hari", "Flukonazol 150 mg dosis tunggal"], "a": "Asiklovir 5x200 mg per oral selama 5-7 hari", "skdi": "4A", "e": "Herpes genitalis diterapi asiklovir oral (mis. 5x200 mg atau 3x400 mg) selama 5-7 hari. Benzatin penisilin untuk sifilis, metronidazol untuk trikomoniasis, doksisiklin untuk klamidia, flukonazol untuk kandida.", "n": "Ascendens no.50"},
+{"t": "Bakteriologi", "q": "Tata laksana topikal untuk eritrasma adalah?", "o": ["Krim eritromisin atau klindamisin", "Krim permetrin", "Krim asiklovir", "Krim nistatin", "Krim hidrokortison"], "a": "Krim eritromisin atau klindamisin", "skdi": "4A", "e": "Eritrasma (Corynebacterium minutissimum) diterapi antibiotik topikal eritromisin/klindamisin (atau eritromisin oral pada lesi luas). Permetrin antiparasit, asiklovir antivirus, nistatin antijamur, hidrokortison steroid.", "n": "Ascendens no.50"},
+{"t": "Tumor Kulit", "q": "Pada evaluasi tahi lalat dengan kaidah ABCDE, manakah temuan yang paling mengarah ke keganasan melanoma?", "o": ["Diameter lebih dari 6 mm", "Warna homogen", "Batas tegas dan rata", "Permukaan datar tanpa peninggian", "Bentuk simetris"], "a": "Diameter lebih dari 6 mm", "skdi": "2", "e": "ABCDE melanoma: Asimetri, Border ireguler, Color bervariasi, Diameter lebih dari 6 mm, dan Evolusi. Diameter lebih dari 6 mm termasuk tanda kecurigaan. Warna homogen, batas tegas, datar, dan simetris justru ciri lesi jinak.", "n": "Arthron 18 no.16 / Aorta 19 no.47"},
+{"t": "Kusta", "q": "Indeks morfologi pada pemeriksaan kusta digunakan untuk menilai?", "o": ["Keberhasilan terapi melalui proporsi kuman utuh", "Jumlah total kuman pada sediaan", "Tipe reaksi kusta", "Derajat cacat", "Kadar antibodi serum"], "a": "Keberhasilan terapi melalui proporsi kuman utuh", "skdi": "4A", "e": "Indeks morfologi menilai persentase basil utuh atau hidup terhadap total basil, mencerminkan keberhasilan terapi dan infektivitas. Jumlah total kuman dinilai indeks bakteri, bukan indeks morfologi.", "n": "Arthron 18 no.32 / Amygdala no.51"},
+{"t": "Penyakit Autoimun", "q": "Perempuan 25 tahun dengan ruam kemerahan di pipi yang memberat saat terpapar matahari, atrofi sentral, disertai sitopenia. Apakah diagnosis yang paling mungkin?", "o": ["Lupus eritematosus diskoid", "Dermatitis seboroik", "Rosasea", "Dermatitis kontak", "Melasma"], "a": "Lupus eritematosus diskoid", "skdi": "3A", "e": "Plak eritem fotosensitif dengan atrofi sentral dan sumbatan folikel khas lupus diskoid; sitopenia mendukung lupus. Dermatitis seboroik di area berminyak, rosasea dengan flushing, dermatitis kontak terkait alergen, melasma hanya hiperpigmentasi.", "n": "Aorta 19 no.20 / Ascendens no.4"},
+{"t": "Dermatitis", "q": "Pasien dengan dermatitis venenata akibat serangga Paederus atau tomcat. Apakah edukasi pencegahan yang paling tepat?", "o": ["Menghindari dan menghalau serangga tanpa menggencet di kulit", "Mengompres dengan air panas", "Menggosok lesi dengan alkohol pekat", "Memberi antibiotik oral rutin", "Memberi antijamur topikal"], "a": "Menghindari dan menghalau serangga tanpa menggencet di kulit", "skdi": "4A", "e": "Dermatitis venenata dicegah dengan menghindari kontak dan tidak menggencet serangga di kulit agar toksin tidak menyebar. Air panas dan alkohol pekat memperberat, antibiotik dan antijamur bukan pencegahan utama.", "n": "Aorta 19 no.90"},
+{"t": "Farmakologi", "q": "Manakah antihistamin H1 generasi ketiga berikut?", "o": ["Levocetirizine", "Chlorpheniramine", "Difenhidramin", "Prometazin", "Hidroksizin"], "a": "Levocetirizine", "skdi": "— (farmakologi)", "e": "Levocetirizine bersama feksofenadin dan desloratadin merupakan antihistamin generasi ketiga, enansiomer atau metabolit aktif dengan sedasi minimal. Sisanya generasi pertama yang sedatif.", "n": "Aorta 19 no.51 / Amygdala no.92"},
+{"t": "Mikosis", "q": "Bayi dengan bercak putih di lidah dan mukosa mulut yang sulit dilepas, ibu sedang menyusui. Apakah diagnosis yang tepat?", "o": ["Kandidiasis oral", "Leukoplakia", "Liken planus oral", "Stomatitis aftosa", "Difteri"], "a": "Kandidiasis oral", "skdi": "4A", "e": "Plak putih seperti susu yang melekat di mukosa mulut bayi khas kandidiasis oral oleh Candida albicans. Leukoplakia dan liken planus pada dewasa, stomatitis aftosa berupa ulkus nyeri, difteri membentuk pseudomembran abu-abu.", "n": "Ascendens no.89"},
+{"t": "Kelenjar Apokrin", "q": "Bau badan tidak sedap akibat penguraian sekret oleh bakteri pada kelenjar apokrin disebut?", "o": ["Bromhidrosis", "Hiperhidrosis", "Anhidrosis", "Miliaria", "Hipohidrosis"], "a": "Bromhidrosis", "skdi": "— (fisiologi)", "e": "Bromhidrosis adalah bau badan akibat degradasi sekret apokrin oleh bakteri. Hiperhidrosis keringat berlebih, anhidrosis tidak berkeringat, miliaria sumbatan kelenjar keringat, hipohidrosis keringat berkurang.", "n": "Anthelix no.14 / Amygdala no.4"},
+{"t": "TB Kulit", "q": "Media kultur standar untuk Mycobacterium tuberculosis penyebab skrofuloderma adalah?", "o": ["Lowenstein-Jensen", "Sabouraud dextrose agar", "MacConkey agar", "Thayer-Martin", "Agar darah"], "a": "Lowenstein-Jensen", "skdi": "3A", "e": "Mycobacterium tuberculosis dikultur pada media Lowenstein-Jensen. Sabouraud untuk jamur, MacConkey untuk basil Gram negatif, Thayer-Martin untuk Neisseria, agar darah untuk bakteri umum.", "n": "Aorta 19 no.3 / Kuis Pekan 3 no.1"},
+{"t": "Eritroskuamosa", "q": "Pada histopatologi psoriasis, kumpulan neutrofil di dalam stratum korneum disebut?", "o": ["Mikroabses Munro", "Badan Civatte", "Sel Tzanck", "Granuloma Langhans", "Badan Donovan"], "a": "Mikroabses Munro", "skdi": "3A", "e": "Mikroabses Munro berupa neutrofil dalam stratum korneum parakeratotik khas psoriasis, selain akantosis reguler dan pemanjangan rete ridges. Badan Civatte pada liken planus, sel Tzanck pada herpes, granuloma Langhans pada TB.", "n": "Anthelix no.24"},
+{"t": "Eritroskuamosa", "q": "Eritroderma menyeluruh dengan limfadenopati dan ditemukan sel Sezary pada darah tepi paling mengarah pada?", "o": ["Limfoma sel T kutaneus", "Reaksi alergi obat ringan", "Infeksi jamur superfisial", "Psoriasis gutata", "Dermatitis kontak iritan"], "a": "Limfoma sel T kutaneus", "skdi": "2", "e": "Eritroderma dengan sel Sezary dan limfadenopati mengarah pada sindrom Sezary atau cutaneous T-cell lymphoma yang bersifat keganasan. Bukan alergi ringan, infeksi jamur, psoriasis gutata, atau dermatitis kontak iritan.", "n": "Aorta 19 no.40 / Amygdala no.17"},
+{"t": "Dermatitis", "q": "Pasien dengan plak berbentuk koin, berbatas tegas, basah dan gatal di tungkai. Apakah diagnosis yang tepat?", "o": ["Dermatitis numularis", "Tinea korporis", "Psoriasis", "Dermatitis seboroik", "Pitiriasis rosea"], "a": "Dermatitis numularis", "skdi": "4A", "e": "Lesi berbentuk koin yang gatal dan eksudatif khas dermatitis numularis. Tinea korporis ada central healing dengan KOH positif, psoriasis skuama mikaseus, seboroik area berminyak, pitiriasis rosea dengan herald patch.", "n": "Aorta 19 no.29 / Ascendens no.4"},
+{"t": "Virologi", "q": "Laki-laki 30 tahun dengan papul kasar berduri di jari tangan, permukaan bertitik hitam. Apakah diagnosis yang tepat?", "o": ["Veruka vulgaris", "Moluskum kontagiosum", "Keratosis seboroik", "Klavus", "Karsinoma sel skuamosa"], "a": "Veruka vulgaris", "skdi": "4A", "e": "Papul verukosa dengan titik hitam berupa kapiler trombosis khas veruka vulgaris akibat HPV. Moluskum dengan umbilikasi, keratosis seboroik stuck-on pada lansia, klavus mata ikan akibat tekanan, karsinoma sel skuamosa tumbuh invasif.", "n": "Aorta 19 no.74 / Amygdala no.21"},
+{"t": "Farmakologi", "q": "Sediaan topikal untuk dipakai pada seluruh tubuh dalam satu kali aplikasi kira-kira membutuhkan?", "o": ["30 gram", "5 gram", "10 gram", "15 gram", "100 gram"], "a": "30 gram", "skdi": "— (farmakologi)", "e": "Untuk mengoles seluruh permukaan tubuh dewasa sekali aplikasi dibutuhkan sekitar 30 gram. 15 gram untuk wajah selama beberapa hari, jumlah lain tidak sesuai perkiraan kebutuhan satu kali olesan seluruh tubuh.", "n": "Axon 20 no.30 / Amygdala no.93"},
+{"t": "Bioetik", "q": "Seorang dokter melayani semua pasien tanpa membedakan suku, agama, atau status sosial. Kaidah bioetik yang diterapkan adalah?", "o": ["Justice", "Autonomy", "Beneficence", "Non-maleficence", "Veracity"], "a": "Justice", "skdi": "— (etik)", "e": "Memperlakukan pasien secara adil dan setara mencerminkan justice. Autonomy menghormati keputusan pasien, beneficence berbuat baik, non-maleficence tidak membahayakan, veracity kejujuran.", "n": "Aorta 19 no.81 / Ascendens no.32"},
+{"t": "Farmakologi", "q": "Kortikosteroid sistemik sebaiknya diberikan pada pagi hari untuk menyesuaikan?", "o": ["Irama diurnal sekresi kortisol", "Waktu makan malam", "Jadwal tidur siang", "Kadar gula darah puasa", "Siklus menstruasi"], "a": "Irama diurnal sekresi kortisol", "skdi": "— (farmakologi)", "e": "Pemberian pagi hari mengikuti irama diurnal kortisol endogen yang memuncak pagi sehingga menekan supresi aksis HPA. Faktor lain bukan dasar penjadwalan ini.", "n": "Amygdala no.38"},
+{"t": "Farmakologi", "q": "Bentuk sediaan berupa campuran homogen zat aktif yang terlarut sempurna dalam pelarut cair disebut?", "o": ["Solusio", "Suspensi", "Emulsi", "Pasta", "Salep"], "a": "Solusio", "skdi": "— (farmakologi)", "e": "Solusio adalah larutan homogen zat terlarut dalam pelarut. Suspensi partikel padat tersebar dalam cairan, emulsi campuran dua cairan tak bercampur, pasta dan salep sediaan semisolid.", "n": "Axon 20 no.28"},
+{"t": "Kusta", "q": "Pada pemeriksaan slit skin smear, indeks bakteri tertinggi yaitu 6+ berarti ditemukan?", "o": ["Lebih dari 1000 basil dalam satu lapangan pandang", "1 sampai 10 basil dalam 100 lapangan pandang", "1 sampai 10 basil dalam 10 lapangan pandang", "1 sampai 10 basil dalam 1 lapangan pandang", "10 sampai 100 basil dalam 10 lapangan pandang"], "a": "Lebih dari 1000 basil dalam satu lapangan pandang", "skdi": "4A", "e": "Skala Ridley indeks bakteri 6+ berarti lebih dari 1000 basil per lapangan pandang. Nilai 5+ adalah 100 sampai 1000 per lapangan, sedangkan jumlah kecil per banyak lapangan adalah nilai indeks rendah.", "n": "Amygdala no.65 / Aorta 19 no.59"},
+{"t": "Erupsi Obat", "q": "Tata laksana awal pasien Stevens-Johnson syndrome di fasilitas kesehatan adalah?", "o": ["Hentikan obat penyebab dan rawat suportif dengan resusitasi cairan", "Lanjutkan obat penyebab dengan dosis dikurangi", "Berikan antijamur sistemik", "Berikan antivirus oral rutin", "Berikan antibiotik topikal saja"], "a": "Hentikan obat penyebab dan rawat suportif dengan resusitasi cairan", "skdi": "3B", "e": "Langkah utama SJS atau TEN adalah menghentikan obat penyebab segera, rawat suportif berupa cairan, nutrisi, perawatan luka, dan suhu, lalu rujuk. Melanjutkan obat berbahaya; antijamur, antivirus, dan antibiotik bukan terapi utama.", "n": "Ascendens no.50"},
+{"t": "Kelenjar Sebasea", "q": "Remaja dengan komedo sekitar 10 buah, papul dan pustul total kurang dari 15 tanpa nodul. Termasuk akne vulgaris derajat?", "o": ["Ringan", "Sedang", "Berat", "Sangat berat", "Nodulokistik"], "a": "Ringan", "skdi": "4A", "e": "Komedo sedikit dengan papulopustul minimal tanpa nodul atau kista termasuk akne derajat ringan. Derajat sedang bila lesi inflamasi lebih banyak, berat bila ada nodul atau kista luas.", "n": "Amygdala no.66 / Ascendens no.20"},
+{"t": "Dermatitis", "q": "Apa perbedaan mendasar patogenesis dermatitis kontak alergi dibanding dermatitis kontak iritan?", "o": ["DKA melibatkan sensitisasi imun spesifik sedangkan DKI akibat kerusakan langsung non-imunologik", "DKA tidak melibatkan sistem imun sama sekali", "DKI selalu memerlukan paparan berulang bertahun-tahun", "DKA hanya terjadi pada anak", "DKI diperantarai imunoglobulin E"], "a": "DKA melibatkan sensitisasi imun spesifik sedangkan DKI akibat kerusakan langsung non-imunologik", "skdi": "4A", "e": "DKA adalah hipersensitivitas tipe IV yang membutuhkan sensitisasi alergen sebelumnya, sedangkan DKI akibat efek toksik atau iritan langsung tanpa mekanisme imun spesifik. DKI bisa terjadi pada paparan pertama bila iritan kuat.", "n": "Arthron 18 no.48"},
+{"t": "IMS", "q": "Hasil serologi sifilis menunjukkan VDRL reaktif titer rendah namun TPHA non-reaktif. Interpretasi yang paling tepat adalah?", "o": ["Reaksi positif palsu biologik", "Sifilis primer aktif", "Sifilis laten lanjut", "Reinfeksi sifilis", "Neurosifilis"], "a": "Reaksi positif palsu biologik", "skdi": "3A", "e": "VDRL reaktif dengan TPHA non-reaktif menandakan biological false positive seperti pada kehamilan, infeksi, atau autoimun karena tes treponemal spesifik negatif. Diagnosis sifilis aktif memerlukan tes treponemal yang reaktif.", "n": "Aorta 19 no.95"},
+{"t": "IMS", "q": "Mekanisme rekurensi herpes genitalis adalah?", "o": ["Reaktivasi HSV laten di ganglion akibat penurunan imunitas", "Reinfeksi ulang dari pasangan setiap episode", "Mutasi virus menjadi resisten", "Reaksi autoimun terhadap epidermis", "Infeksi bakteri sekunder"], "a": "Reaktivasi HSV laten di ganglion akibat penurunan imunitas", "skdi": "4A", "e": "Rekurensi herpes genitalis terjadi karena reaktivasi HSV yang laten di ganglion sakral saat imunitas menurun seperti stres, demam, atau haid. Bukan reinfeksi baru, mutasi, autoimun, atau infeksi bakteri.", "n": "Amygdala no.56 / Aorta 19 no.32"},
+{"t": "Pigmentasi", "q": "Hormon yang berperan memperberat melasma terutama pada kehamilan dan pengguna kontrasepsi adalah?", "o": ["Estrogen dan progesteron", "Insulin dan glukagon", "Tiroksin dan kalsitonin", "Kortisol dan aldosteron", "Adrenalin dan noradrenalin"], "a": "Estrogen dan progesteron", "skdi": "4A", "e": "Estrogen dan progesteron merangsang melanogenesis sehingga memperberat melasma pada kehamilan atau kontrasepsi hormonal bersama paparan ultraviolet. Hormon lain tidak berperan langsung pada melasma.", "n": "Ascendens no.52"},
+{"t": "Dermatofitosis", "q": "Molekul dinding sel dermatofita yang menekan proliferasi keratinosit dan respon imun lokal adalah?", "o": ["Mannan", "Koagulase", "Hyaluronidase", "Toksin eksfoliatif", "Lipase"], "a": "Mannan", "skdi": "— (patofisiologi)", "e": "Mannan dari dinding sel dermatofita seperti Trichophyton rubrum menekan proliferasi keratinosit dan respon imun lokal sehingga infeksi menjadi kronik. Koagulase dan toksin eksfoliatif milik Staphylococcus aureus, hyaluronidase milik streptokokus.", "n": "Arthron 18 no.33"},
+{"t": "Fotobiologi", "q": "Sinar ultraviolet yang memiliki panjang gelombang terpanjang dan penetrasi paling dalam ke dermis adalah?", "o": ["UVA", "UVB", "UVC", "Sinar tampak", "Inframerah"], "a": "UVA", "skdi": "— (fotobiologi)", "e": "UVA dengan panjang gelombang 320 sampai 400 nm berpenetrasi paling dalam hingga dermis dan berperan pada penuaan kulit dan pigmentasi. UVB lebih dangkal menyebabkan sunburn, UVC diserap ozon, sinar tampak dan inframerah berbeda mekanisme.", "n": "Arthron 18 no.12"},
+{"t": "Fotobiologi", "q": "Tanda molekuler khas kerusakan DNA akibat sinar ultraviolet adalah?", "o": ["Pembentukan dimer pirimidin", "Pemutusan untai tunggal oleh radikal bebas saja", "Metilasi sitosin", "Delesi mitokondria masif", "Translokasi kromosom"], "a": "Pembentukan dimer pirimidin", "skdi": "— (fotobiologi)", "e": "Ultraviolet terutama UVB menyebabkan dimer pirimidin atau cyclobutane pyrimidine dimer yang memicu mutasi bila tidak diperbaiki. Mekanisme lain bukan tanda khas kerusakan ultraviolet.", "n": "Ascendens no.73"},
+{"t": "Vitamin D", "q": "Paparan sinar matahari menghasilkan vitamin D melalui konversi di kulit dari?", "o": ["7-dehidrokolesterol menjadi previtamin D3", "Beta karoten menjadi retinol", "Kolekalsiferol menjadi 7-dehidrokolesterol", "Ergosterol menjadi melanin", "Tirosin menjadi melanin"], "a": "7-dehidrokolesterol menjadi previtamin D3", "skdi": "— (fisiologi)", "e": "UVB mengubah 7-dehidrokolesterol di epidermis menjadi previtamin D3 lalu vitamin D3, yang kemudian dihidroksilasi di hati dan ginjal. Pilihan lain bukan jalur sintesis vitamin D.", "n": "Anthelix no.80"},
+{"t": "Bakteriologi", "q": "Seorang perempuan 25 tahun mengeluh gatal dan kemerahan pada lipatan paha sejak 8 hari. Status dermatologis: makula eritem dengan skuama halus. Pemeriksaan KOH negatif, dan lampu Wood memperlihatkan fluoresensi merah bata (coral red). Apakah etiologi tersering kasus ini?", "o": ["Corynebacterium minutissimum", "Candida albicans", "Trichophyton rubrum", "Malassezia furfur", "Staphylococcus aureus"], "a": "Corynebacterium minutissimum", "skdi": "4A", "e": "Fluoresensi merah bata pada lampu Wood dengan KOH negatif khas eritrasma yang disebabkan Corynebacterium minutissimum. Candida memberi pseudohifa pada KOH, Trichophyton memberi hifa bersepta, Malassezia memberi gambaran spaghetti and meatballs, Staphylococcus menyebabkan pioderma.", "n": "Ascendens no.45"},
+{"t": "Erupsi Obat", "q": "Seorang perempuan 47 tahun datang dengan bercak merah di seluruh tubuh disertai sariawan sejak 2 hari, dua minggu setelah mengonsumsi alopurinol untuk nyeri sendi. Tampak makula eritem, vesikel, purpura, dan erosi pada mukosa mulut, anogenital, serta mata, dengan luas lepasnya kulit kurang dari 10 persen. Apakah diagnosis yang tepat?", "o": ["Stevens-Johnson syndrome", "Nekrolisis epidermal toksik", "Eritema multiforme minor", "Pemfigus vulgaris", "Fixed drug eruption generalisata"], "a": "Stevens-Johnson syndrome", "skdi": "3B", "e": "Keterlibatan dua atau lebih mukosa dengan lepasnya epidermis kurang dari 10 persen luas tubuh akibat obat khas Stevens-Johnson syndrome. TEN bila lebih dari 30 persen, eritema multiforme minor tanpa keterlibatan mukosa luas, pemfigus dengan bula kendur kronik, FDE berupa lesi terbatas berulang di lokasi sama.", "n": "Aorta 19 no.61 / Aorta 19 no.48"},
+{"t": "Kelenjar Ekrin", "q": "Seorang bayi laki-laki 9 bulan dibawa dengan keluhan biang keringat. Pemeriksaan fisik menunjukkan papulovesikel eritem di leher, badan, dan ketiak. Histopatologi memperlihatkan infiltrat limfosit periduktal pada papila dermis dan epidermis bawah. Apakah diagnosis yang sesuai?", "o": ["Miliaria rubra", "Miliaria kristalina", "Miliaria profunda", "Anhidrotic asthenia", "Bromhidrosis"], "a": "Miliaria rubra", "skdi": "4A", "e": "Papulovesikel eritem akibat sumbatan duktus ekrin pada lapisan epidermis dengan radang khas miliaria rubra (prickly heat). Miliaria kristalina berupa vesikel jernih superfisial tanpa radang, miliaria profunda sumbatan lebih dalam, anhidrotic asthenia bila luas, bromhidrosis adalah bau badan apokrin.", "n": "Aorta 19 no.83"},
+{"t": "Kusta", "q": "Seorang perempuan 35 tahun mengeluh bercak di lengan dan dada sejak 6 bulan yang makin menebal dan mati rasa, disertai jari tangan kaku seperti cakar ayam dan kulit kering sulit berkeringat. Apakah pemeriksaan penunjang sederhana untuk menegakkan diagnosis?", "o": ["Pemeriksaan basil tahan asam dari kerokan kulit", "Pengecatan Gram", "Pemeriksaan KOH", "Sediaan basah NaCl", "Tes Tzanck"], "a": "Pemeriksaan basil tahan asam dari kerokan kulit", "skdi": "4A", "e": "Bercak hipoestesi dengan penebalan saraf dan deformitas khas kusta; pemeriksaan sederhana berupa slit skin smear dengan pewarnaan Ziehl-Neelsen mencari basil tahan asam. Gram untuk bakteri umum, KOH untuk jamur, NaCl untuk trikomonas, Tzanck untuk infeksi herpes.", "n": "Aorta 19 no.66"},
+{"t": "Eritroskuamosa", "q": "Seorang laki-laki 60 tahun diantar keluarga karena bercak merah hampir di seluruh tubuh sejak 1 minggu, disertai gatal dan demam ringan, tanpa riwayat konsumsi obat. Tampak patch eritem dengan skuama mengenai lebih dari 60 persen luas tubuh dan pembesaran limfonodi leher. Apakah diagnosis yang paling tepat?", "o": ["Eritroderma", "Psoriasis vulgaris", "Dermatitis atopik", "Pitiriasis rubra pilaris", "Tinea korporis"], "a": "Eritroderma", "skdi": "3A", "e": "Eritem dan skuama generalisata lebih dari 90 persen (di sini luas dan progresif) dengan limfadenopati disebut eritroderma, suatu kegawatan dermatologi. Psoriasis dan dermatitis atopik bisa menjadi penyebab tetapi diagnosis sindromiknya tetap eritroderma; tinea korporis terlokalisir dengan central healing.", "n": "Aorta 19 no.40"},
+{"t": "Mikosis", "q": "Seorang laki-laki muda penggemar futsal yang sering berkeringat memiliki bercak putih bersisik halus di punggung; KOH menunjukkan hifa pendek dan spora bergerombol. Setelah diberi antijamur, apakah edukasi yang paling tepat?", "o": ["Menghindari keringat berlebih, mandi setelah berolahraga, dan memakai antijamur sesuai anjuran", "Mandi memakai sabun antibiotik setiap hari", "Menghindari konsumsi makanan tinggi protein", "Cukup berobat sekali tanpa perlu kontrol", "Menghindari paparan sinar matahari sepenuhnya"], "a": "Menghindari keringat berlebih, mandi setelah berolahraga, dan memakai antijamur sesuai anjuran", "skdi": "4A", "e": "Pitiriasis versikolor dipicu kelembapan dan keringat; edukasi utama menjaga kulit kering, mandi setelah berkeringat, dan memakai antijamur topikal atau sampo sesuai anjuran karena rekurensi tinggi. Sabun antibiotik, pembatasan protein, berobat sekali, atau menghindari matahari total bukan edukasi yang tepat.", "n": "Anthelix no.8"},
+{"t": "IMS", "q": "Seorang perempuan 34 tahun mantan pekerja migran datang dengan luka pada kelamin sejak seminggu yang tidak nyeri, riwayat berhubungan seks berisiko. Status lokalis: ulkus tunggal pada vulva, dasar bersih, tepi rata dan teraba indurasi. Apakah diagnosis yang paling tepat?", "o": ["Sifilis primer", "Ulkus mole", "Limfogranuloma venereum", "Herpes genitalis", "Granuloma inguinale"], "a": "Sifilis primer", "skdi": "4A", "e": "Ulkus genital tunggal, tidak nyeri, dasar bersih, dengan tepi terindurasi adalah ulkus durum sifilis primer. Ulkus mole nyeri dengan dasar kotor, herpes berupa vesikel berkelompok nyeri, LGV dengan limfadenopati, granuloma inguinale berupa ulkus granulomatosa mudah berdarah.", "n": "Aorta 19 no.23"},
+{"t": "Vesikobulosa", "q": "Seorang perempuan 44 tahun datang dengan lepuh di seluruh tubuh sejak 2 minggu, bula kendur mudah pecah dan nyeri, didahului sariawan di bibir dan mulut. Tanda Nikolsky positif. Di lapisan manakah letak bula pada kasus ini?", "o": ["Intraepidermal suprabasal", "Subepidermal", "Subkorneal", "Pada taut dermoepidermal yang tegang", "Intradermal"], "a": "Intraepidermal suprabasal", "skdi": "3A", "e": "Pemfigus vulgaris menimbulkan bula kendur akibat akantolisis suprabasal sehingga letak bula intraepidermal dan tanda Nikolsky positif. Pemfigoid bulosa memberi bula tegang subepidermal, dan bula subkorneal terdapat pada impetigo bulosa atau pemfigus foliaseus.", "n": "Axon 20 no.13 / Aorta 19 no.43"},
+{"t": "Virologi", "q": "Seorang anak laki-laki 2 tahun dibawa karena bercak merah hampir seluruh tubuh, didahului demam tinggi 4 hari, batuk, pilek, dan mata merah. Ruam mulai dari belakang telinga dan wajah lalu meluas ke badan. Apakah diagnosis yang paling tepat?", "o": ["Morbili", "Rubela", "Roseola infantum", "Eritema infeksiosum", "Demam skarlatina"], "a": "Morbili", "skdi": "4A", "e": "Demam tinggi dengan gejala 3C (cough, coryza, conjunctivitis) diikuti ruam makulopapular sefalokaudal mulai dari belakang telinga khas morbili (campak). Rubela ruam lebih ringan dengan limfadenopati, roseola ruam muncul saat demam turun, eritema infeksiosum dengan slapped cheek, skarlatina dengan lidah strawberry.", "n": "Amygdala no.26"},
+{"t": "Tumor Kulit", "q": "Seorang laki-laki 70 tahun petani datang dengan benjolan di pipi yang mudah berdarah sejak 1 tahun, membesar perlahan dengan ulkus di tengah. Tampak nodul dengan tepi pearly white, teleangiektasis, dan ulkus ireguler. Dari lapisan manakah tumor ini berasal?", "o": ["Sel basal epidermis", "Stratum korneum", "Stratum spinosum", "Kelenjar sebasea", "Melanosit"], "a": "Sel basal epidermis", "skdi": "2", "e": "Nodul tepi pearly white dengan teleangiektasis dan ulserasi pada area terpajan matahari khas karsinoma sel basal yang berasal dari sel basal epidermis. Karsinoma sel skuamosa dari stratum spinosum, melanoma dari melanosit, dan tumor adneksa dari kelenjar.", "n": "Arthron 18 no.26"},
+{"t": "Dermatitis", "q": "Seorang laki-laki 43 tahun tukang cukur yang sering berdiri lama mengeluh kehitaman dan gatal pada tungkai bawah sejak 1 tahun. Tampak makula hiperpigmentasi berbatas tidak tegas dengan skuama dan ekskoriasi, serta pembuluh darah melebar berkelok di tungkai. Apakah diagnosis yang paling tepat?", "o": ["Dermatitis statis", "Tinea pedis", "Dermatitis numularis", "Liken simpleks kronik", "Dermatitis kontak alergi"], "a": "Dermatitis statis", "skdi": "3A", "e": "Hiperpigmentasi, gatal, dan perubahan kulit tungkai bawah disertai varises akibat insufisiensi vena kronik khas dermatitis statis. Tinea pedis dengan KOH positif, numularis berbentuk koin, liken simpleks kronik berupa likenifikasi akibat garukan, DKA terkait alergen kontak.", "n": "Aorta 19 no.29"},
+{"t": "Erupsi Obat", "q": "Seorang laki-laki 25 tahun datang dengan bercak keunguan di bibir atas sejak 2 hari, terasa panas dan perih, didahului warna kecoklatan. Pasien baru mengonsumsi levofloksasin dan pernah mengalami keluhan serupa di lokasi yang sama. Apakah diagnosis yang paling tepat?", "o": ["Fixed drug eruption", "Stevens-Johnson syndrome", "Eritema multiforme", "Herpes labialis", "Cheilitis kontak"], "a": "Fixed drug eruption", "skdi": "4A", "e": "Lesi soliter berulang di lokasi yang sama setelah konsumsi obat tertentu, berupa makula keunguan yang meninggalkan hiperpigmentasi, khas fixed drug eruption. SJS melibatkan mukosa luas, eritema multiforme dengan lesi target, herpes labialis berupa vesikel berkelompok, cheilitis kontak akibat iritan.", "n": "Aorta 19 no.44"},
+{"t": "IMS", "q": "Seorang laki-laki 28 tahun datang dengan lenting nyeri di kemaluan sejak 2 hari, didahului demam dan tidak nafsu makan. Pasien memiliki riwayat keluhan serupa 3 bulan lalu yang sembuh dengan obat dan riwayat berhubungan dengan pekerja seks. Apakah diagnosis yang paling tepat?", "o": ["Herpes genitalis rekuren", "Sifilis primer", "Ulkus mole", "Kondiloma akuminata", "Limfogranuloma venereum"], "a": "Herpes genitalis rekuren", "skdi": "4A", "e": "Vesikel berkelompok nyeri yang berulang di lokasi yang sama dengan gejala prodromal khas herpes genitalis rekuren akibat reaktivasi HSV. Sifilis primer berupa ulkus tidak nyeri, ulkus mole ulkus nyeri dasar kotor, kondiloma berupa vegetasi, LGV dengan limfadenopati.", "n": "Kuis Pekan 3 no.7"},
+{"t": "Kusta", "q": "Seorang laki-laki datang dengan demam dan nodul kemerahan yang nyeri pada keempat ekstremitas sejak beberapa bulan, disertai kontraktur, jari kaki dan tangan clawing, serta pembesaran nervus ulnaris bilateral. Apakah jenis reaksi yang dialami pasien?", "o": ["Eritema nodosum leprosum", "Reaksi reversal", "Fenomena Lucio", "Relaps kusta", "Erupsi obat alergik"], "a": "Eritema nodosum leprosum", "skdi": "4A", "e": "Nodul eritem nyeri disertai demam pada kusta multibasilar adalah eritema nodosum leprosum atau reaksi kusta tipe 2 yang diperantarai kompleks imun. Reaksi reversal (tipe 1) berupa peradangan pada lesi lama tanpa nodul sistemik, fenomena Lucio berupa nekrosis, relaps adalah kambuh aktif.", "n": "Aorta 19 no.91"},
+{"t": "Parasit", "q": "Seorang anak laki-laki 7 tahun dibawa karena bercak merah sangat gatal di punggung kaki yang membentuk lesi berkelok-kelok serpiginosa, muncul setelah bermain pasir di pantai tanpa alas kaki. Apakah penyebab penyakit ini?", "o": ["Ancylostoma braziliense", "Taenia saginata", "Pediculus humanus", "Sarcoptes scabiei", "Trichuris trichiura"], "a": "Ancylostoma braziliense", "skdi": "4A", "e": "Lesi serpiginosa yang menjalar (creeping eruption) setelah kontak tanah atau pasir berpasir khas cutaneous larva migrans akibat larva Ancylostoma braziliense. Taenia menyebabkan taeniasis usus, Pediculus menyebabkan pedikulosis, Sarcoptes menyebabkan skabies, Trichuris menyebabkan trikuriasis.", "n": "Kuis Pekan 3 no.4"},
+{"t": "Erupsi Obat", "q": "Seorang perempuan 47 tahun mengeluh ruam merah kehitaman pada tungkai yang kambuh-kambuhan. Tampak patch eritematosa berbentuk oval pada lokasi yang sama, dan keluhan selalu muncul setiap pasien mengonsumsi jamu pegal linu. Apakah diagnosis yang sesuai?", "o": ["Fixed drug eruption", "Stevens-Johnson syndrome", "Eritema multiforme", "Dermatitis kontak alergi", "Eritema nodosum"], "a": "Fixed drug eruption", "skdi": "4A", "e": "Patch oval berulang di lokasi yang sama setiap mengonsumsi obat atau jamu tertentu khas fixed drug eruption. SJS dan eritema multiforme bersifat akut luas, DKA terkait kontak alergen topikal, eritema nodosum berupa nodul nyeri di tungkai tanpa pola berulang terkait obat.", "n": "Kuis Pekan 4 no.2"},
+{"t": "Mikosis", "q": "Seorang anak perempuan 7 tahun datang dengan gatal dan kebotakan setempat di kepala sejak 1 bulan disertai sisik, memelihara kucing di rumah. Tampak patch keabuan dengan skuama dan rambut patah tepat di atas kulit kepala. Apakah diagnosis yang paling tepat?", "o": ["Grey patch ringworm tinea kapitis", "Black dot tinea kapitis", "Kerion celsi", "Tinea favosa", "Dermatitis seboroik"], "a": "Grey patch ringworm tinea kapitis", "skdi": "4A", "e": "Patch keabuan berskuama dengan rambut patah di atas permukaan kulit kepala akibat Microsporum khas grey patch ringworm, sering dari hewan seperti kucing. Black dot oleh Trichophyton dengan rambut patah di muara folikel, kerion berupa massa radang bernanah, favosa dengan skutula, seboroik tanpa kerontokan dan rambut patah.", "n": "Anthelix no.47"},
+{"t": "IMS", "q": "Seorang perempuan 12 tahun menjalani pemeriksaan laboratorium dan didapatkan tes non-treponema VDRL reaktif dengan titer 1/4, namun tes treponema TPHA non-reaktif. Bagaimana interpretasi hasil tersebut?", "o": ["Positif palsu biologik", "Infeksi treponema aktif", "Sifilis laten lanjut", "Reinfeksi sifilis", "Neurosifilis"], "a": "Positif palsu biologik", "skdi": "3A", "e": "VDRL reaktif titer rendah dengan TPHA non-reaktif menunjukkan biological false positive karena tes treponemal yang spesifik negatif. Diagnosis sifilis memerlukan konfirmasi tes treponemal yang reaktif, sehingga pilihan infeksi aktif, laten, reinfeksi, dan neurosifilis tidak tepat.", "n": "Aorta 19 no.94"},
+{"t": "Tumor Kulit", "q": "Seorang perempuan 46 tahun datang dengan bercak kecoklatan di wajah, leher, dan dada sejak 3 tahun yang membesar dan bertambah banyak. Tampak papul hiperpigmentasi multipel batas tegas dengan permukaan verukosa tampak menempel seperti ditempel di kulit. Apakah diagnosis yang paling tepat?", "o": ["Keratosis seboroik", "Melasma", "Lentigo solaris", "Veruka vulgaris", "Nevus pigmentosus"], "a": "Keratosis seboroik", "skdi": "2", "e": "Papul hiperpigmentasi verukosa dengan tampilan stuck-on pada usia lanjut khas keratosis seboroik. Melasma berupa makula hiperpigmentasi datar simetris, lentigo solaris makula datar, veruka vulgaris papul kasar akibat HPV, nevus pigmentosus tampak sebagai tahi lalat.", "n": "Aorta 19 no.15"},
+{"t": "Bioetik", "q": "Seorang dokter didatangi pasangan; sang istri hamil 8 minggu dan menderita kusta, lalu suami meminta resep obat penggugur kandungan karena takut anak tertular. Dokter menolak memberi abortifasien dan menyarankan rujukan yang tepat. Kaidah bioetik apa yang menjadi dasar penolakan tersebut?", "o": ["Non-maleficence", "Autonomy", "Justice", "Beneficence", "Fidelity"], "a": "Non-maleficence", "skdi": "— (etik)", "e": "Menolak tindakan aborsi tanpa indikasi medis yang membahayakan janin menerapkan non-maleficence yaitu tidak menimbulkan bahaya. Autonomy menghormati keputusan pasien, justice keadilan, beneficence berbuat baik, fidelity menjaga kesetiaan dan janji profesi.", "n": "Axon 20 no.26 / Amygdala no.103"},
+{"t": "Dermatitis", "q": "Seorang anak laki-laki 8 tahun sangat gatal dan kambuh-kambuhan sejak usia 2 tahun, dengan riwayat keluarga menderita keluhan serupa dan asma. Tampak papul dan plak dengan ekskoriasi serta likenifikasi di daerah lipatan. Apakah diagnosis yang paling tepat?", "o": ["Dermatitis atopik", "Dermatitis kontak alergi", "Skabies", "Liken simpleks kronik", "Psoriasis"], "a": "Dermatitis atopik", "skdi": "4A", "e": "Gatal kronik kambuhan sejak kecil dengan predileksi lipatan dan riwayat atopi keluarga khas dermatitis atopik. DKA terkait alergen kontak, skabies gatal malam dengan terowongan dan riwayat kontak, liken simpleks kronik akibat garukan kronik terlokalisir, psoriasis dengan skuama mikaseus.", "n": "Ascendens no.101"},
+{"t": "Eritroskuamosa", "q": "Seorang laki-laki 45 tahun datang dengan bercak merah bersisik di siku, lutut, dan kepala sejak 2 minggu disertai gatal dan nyeri sendi. Tampak plak eritem dengan skuama mikaseus multipel. Bila dilakukan biopsi, apakah gambaran histopatologi yang khas?", "o": ["Parakeratosis dengan mikroabses Munro", "Spongiosis luas", "Akantolisis suprabasal", "Granuloma tuberkuloid", "Infiltrat limfosit band-like"], "a": "Parakeratosis dengan mikroabses Munro", "skdi": "3A", "e": "Psoriasis menunjukkan parakeratosis, akantosis reguler, dan mikroabses Munro berupa neutrofil di stratum korneum. Spongiosis pada dermatitis, akantolisis pada pemfigus, granuloma tuberkuloid pada TB kulit, infiltrat band-like pada liken planus.", "n": "Arthron 18 no.28 / Aorta 19 no.87"},
+{"t": "Kelainan Rambut", "q": "Seorang laki-laki 34 tahun mengeluh kebotakan setempat yang muncul bertahap dan makin memburuk tanpa gatal maupun nyeri. Pemeriksaan menunjukkan kebotakan terlokalisir tanpa tanda inflamasi, tanpa jaringan parut, dengan rambut tanda seru di tepi lesi. Apakah diagnosis yang paling tepat?", "o": ["Alopesia areata", "Alopesia androgenik", "Alopesia sikatrik", "Telogen effluvium", "Anagen effluvium"], "a": "Alopesia areata", "skdi": "2", "e": "Kebotakan terlokalisir berbatas tegas tanpa inflamasi maupun parut dengan exclamation mark hair khas alopesia areata. Alopesia androgenik berpola garis rambut mundur, sikatrik meninggalkan parut, telogen dan anagen effluvium berupa kerontokan difus.", "n": "Axon 20 no.8"},
+{"t": "IMS", "q": "Seorang perempuan 32 tahun datang dengan kutil kelamin sejak 1 bulan. Tampak papul verukous sewarna kulit, multipel dan diskret pada vulva dan vagina. Apakah pemeriksaan penunjang sederhana yang tepat untuk kasus ini?", "o": ["Tes asam asetat 5 persen", "Tes Tzanck", "Pemeriksaan KOH", "Tes VDRL", "Pengecatan Gram"], "a": "Tes asam asetat 5 persen", "skdi": "3A", "e": "Pengolesan asam asetat 5 persen menimbulkan gambaran acetowhite pada lesi kondiloma akuminata akibat HPV. Tzanck untuk herpes, KOH untuk jamur, VDRL untuk sifilis, dan pengecatan Gram untuk infeksi bakteri seperti gonore.", "n": "Kuis Pekan 4 no.1"},
+{"t": "Dermatitis", "q": "Seorang laki-laki 30 tahun mengeluh bercak merah gatal di sekitar hidung dan alis sejak 1 minggu yang memberat saat menghadapi ujian, dengan riwayat ketombe. Apakah apendiks kulit yang paling berperan dalam patogenesis penyakit ini?", "o": ["Glandula sebasea", "Glandula sudorifera ekrin", "Glandula apokrin", "Folikel rambut", "Melanosit"], "a": "Glandula sebasea", "skdi": "4A", "e": "Dermatitis seboroik terjadi di area kaya kelenjar sebasea dan berkaitan dengan Malassezia serta produksi sebum, diperberat stres. Kelenjar ekrin dan apokrin berperan pada gangguan keringat, folikel rambut pada folikulitis, melanosit pada gangguan pigmentasi.", "n": "Aorta 19 no.25"},
+{"t": "Virologi", "q": "Seorang perempuan 22 tahun datang dengan bercak merah di punggung sejak 1 minggu, diawali satu bercak besar di perut yang diikuti banyak bercak lebih kecil dengan skuama kolaret, KOH negatif. Apakah virus yang reaktivasinya dianggap sebagai penyebab penyakit ini?", "o": ["Human herpesvirus 6 dan 7", "Poxvirus", "Human papillomavirus", "Varicella zoster virus", "Epstein-Barr virus"], "a": "Human herpesvirus 6 dan 7", "skdi": "3A", "e": "Pitiriasis rosea diawali herald patch lalu lesi menyebar pola pohon natal dengan skuama kolaret, dan dikaitkan dengan reaktivasi HHV-6 dan HHV-7. Poxvirus menyebabkan moluskum, HPV menyebabkan veruka, VZV menyebabkan herpes zoster, EBV terkait mononukleosis.", "n": "Anthelix no.59"},
+{"t": "IMS", "q": "Seorang perempuan 32 tahun mengeluh keputihan sejak 1 minggu disertai rasa panas dan ingin berkemih terus. Tampak sekret vagina kekuningan berbuih dan serviks memberikan gambaran strawberry cervix. Apakah pemeriksaan yang paling disarankan?", "o": ["Sediaan basah NaCl dari forniks posterior", "Pemeriksaan KOH 10 persen", "Tes Tzanck", "Pewarnaan Gram sekret uretra", "Kultur media Thayer-Martin"], "a": "Sediaan basah NaCl dari forniks posterior", "skdi": "4A", "e": "Strawberry cervix dengan sekret kuning berbuih khas trikomoniasis; pemeriksaan sediaan basah NaCl memperlihatkan Trichomonas vaginalis yang motil. KOH untuk kandida, Tzanck untuk herpes, Gram dan Thayer-Martin untuk gonore.", "n": "Aorta 19 no.21"},
+{"t": "Tumor Kulit", "q": "Seorang anak perempuan 2 bulan dibawa karena benjolan merah di lengan yang muncul sejak usia 2 minggu dan membesar. Tampak nodul eritem soliter non-blanching. Apakah mekanisme yang mendasari kasus ini?", "o": ["Angiogenesis", "Adipogenesis", "Malformasi venosa", "Vasodilatasi sementara", "Vesikulopati"], "a": "Angiogenesis", "skdi": "2", "e": "Hemangioma infantil muncul beberapa minggu setelah lahir dan membesar akibat proliferasi pembuluh darah atau angiogenesis. Malformasi vaskular sudah ada sejak lahir dan tumbuh proporsional, sedangkan adipogenesis, vasodilatasi sementara, dan vesikulopati tidak menjelaskan nodul vaskular yang membesar ini.", "n": "Aorta 19 no.84"},
+{"t": "Dermatitis", "q": "Seorang bayi 2 bulan dibawa karena bercak merah di kedua pipi sejak 1 minggu, dengan riwayat keluarga asma. Tampak papul eritem, vesikel minimal, dan makula eritem dengan skuama. Apakah pilihan steroid topikal yang paling tepat?", "o": ["Hidrokortison", "Mometason", "Betametason dipropionat", "Klobetasol propionat", "Deksametason"], "a": "Hidrokortison", "skdi": "4A", "e": "Pada dermatitis atopik bayi dengan lesi di wajah dipilih steroid potensi rendah seperti hidrokortison untuk meminimalkan efek samping pada kulit tipis. Mometason, betametason, dan klobetasol berpotensi tinggi sehingga tidak aman untuk wajah bayi, deksametason topikal tidak sesuai untuk indikasi ini.", "n": "Aorta 19 no.12"},
+{"t": "Parasit", "q": "Seorang laki-laki 45 tahun mengeluh gatal di kaki sejak 2 minggu dengan bercak merah yang makin menjalar berkelok, riwayat bermain di pasir pantai tanpa alas kaki. Apakah terapi kausatif yang paling tepat?", "o": ["Albendazol 400 mg per hari selama 3 hari", "Prednison 2x5 mg selama 5 hari", "Pirantel pamoat dosis tunggal", "Permetrin 5 persen topikal", "Amoksisilin 3x500 mg selama 5 hari"], "a": "Albendazol 400 mg per hari selama 3 hari", "skdi": "4A", "e": "Cutaneous larva migrans diterapi antihelmintik seperti albendazol 400 mg per hari selama 3 hari atau tiabendazol. Prednison hanya simptomatik, pirantel pamoat untuk cacing usus, permetrin untuk skabies, dan amoksisilin untuk infeksi bakteri.", "n": "Aorta 19 no.13 / Aorta 19 no.53"},
+{"t": "Kelenjar Sebasea", "q": "Seorang perempuan 19 tahun mengeluh bintik hitam dan kadang bernanah di wajah sejak 1 bulan. Tampak komedo blackhead terutama di hidung berjumlah sekitar 10, disertai papul eritem dan pustul berjumlah sekitar 12, tanpa nodul. Apakah diagnosis yang paling tepat?", "o": ["Akne vulgaris ringan", "Akne vulgaris sedang", "Dermatitis perioral", "Erupsi akneiformis", "Dermatitis seboroik"], "a": "Akne vulgaris ringan", "skdi": "4A", "e": "Komedo dengan sedikit papulopustul tanpa nodul tergolong akne vulgaris ringan. Akne sedang bila lesi inflamasi lebih banyak, dermatitis perioral tanpa komedo, erupsi akneiformis dipicu obat dan muncul mendadak monomorf, dermatitis seboroik berupa skuama berminyak.", "n": "Aorta 19 no.86"},
+{"t": "Kelenjar Sebasea", "q": "Seorang perempuan 16 tahun datang dengan jerawat; tampak komedo, papul, pustul, dan nodul di wajah dan dada atas. Dokter memberikan krim malam yang bersifat anti-hiperkeratinisasi. Apakah obat topikal yang dimaksud?", "o": ["Asam retinoat", "Asam fusidat", "Klindamisin", "Benzoil peroksida", "Sulfur presipitatum"], "a": "Asam retinoat", "skdi": "4A", "e": "Asam retinoat (tretinoin) bersifat komedolitik dan anti-hiperkeratinisasi sehingga dipakai sebagai krim malam pada akne. Asam fusidat dan klindamisin bersifat antibakteri, benzoil peroksida antibakteri dan keratolitik ringan, sulfur bersifat keratolitik tetapi bukan anti-hiperkeratinisasi utama.", "n": "Aorta 19 no.10"},
+{"t": "UKK", "q": "Seorang perempuan dengan varises tungkai mengeluh borok yang nyeri di tungkai bawah. Pada pemeriksaan tampak defek kulit yang melewati epidermis hingga dermis sehingga bila sembuh meninggalkan jaringan parut. Apakah istilah ujud kelainan kulit yang tepat?", "o": ["Ulkus", "Erosi", "Ekskoriasi", "Krusta", "Fisura"], "a": "Ulkus", "skdi": "— (UKK dasar)", "e": "Defek kulit yang mencapai dermis atau lebih dalam sehingga sembuh dengan parut disebut ulkus. Erosi hanya sampai epidermis tanpa parut, ekskoriasi akibat garukan, krusta adalah eksudat mengering, fisura berupa retakan linier.", "n": "Axon 20 no.14"},
+{"t": "IMS", "q": "Seorang laki-laki 35 tahun datang dengan bercak merah di telapak tangan dan kaki sejak 1 minggu, tidak gatal maupun nyeri, disertai rambut rontok dan riwayat luka di kelamin yang sembuh sendiri 2 bulan lalu. Apakah terapi yang paling tepat?", "o": ["Benzatin penisilin G 2,4 juta unit intramuskular", "Injeksi difenhidramin 1 ampul per hari", "Asiklovir 5x200 mg per oral", "Ceftriakson 1 g tiap 12 jam", "Metilprednisolon 62,5 mg injeksi"], "a": "Benzatin penisilin G 2,4 juta unit intramuskular", "skdi": "4A", "e": "Ruam pada telapak tangan dan kaki tidak nyeri dengan riwayat ulkus genital yang sembuh sendiri khas sifilis sekunder; terapi lini pertama benzatin penisilin G. Antihistamin dan kortikosteroid tidak kuratif, asiklovir untuk herpes, ceftriakson untuk gonore.", "n": "Arthron 18 no.18"},
+{"t": "Mikosis", "q": "Seorang perempuan 25 tahun olahragawan mengeluh gatal dan kemerahan di bawah payudara, ketiak, dan selangkangan sejak 2 minggu. Tampak plak eritem dengan maserasi dan lesi satelit di sekitarnya. Apakah pemeriksaan dan hasil yang diharapkan?", "o": ["KOH 10 persen menunjukkan pseudohifa dan blastospora", "KOH 10 persen menunjukkan hifa panjang bersepta", "KOH dengan tinta Parker menunjukkan spaghetti and meatballs", "Pengecatan Gram menunjukkan kokus Gram positif", "Lampu Wood menunjukkan fluoresensi merah bata"], "a": "KOH 10 persen menunjukkan pseudohifa dan blastospora", "skdi": "4A", "e": "Plak eritem dengan maserasi dan lesi satelit di area lembap khas kandidiasis kutis; KOH menunjukkan pseudohifa dan blastospora. Hifa panjang bersepta pada dermatofitosis, spaghetti and meatballs pada pitiriasis versikolor, kokus Gram positif pada pioderma, fluoresensi merah bata pada eritrasma.", "n": "Kuis Pekan 3 no.3"},
+{"t": "Mikosis", "q": "Seorang perempuan 35 tahun mengeluh bercak merah gatal di bawah payudara terutama saat berkeringat. Tampak plak eritem polisiklik dengan tepi lebih aktif dan central healing. Bila ingin mengidentifikasi organisme penyebab, media kultur apakah yang digunakan?", "o": ["Sabouraud dextrose agar", "Lowenstein-Jensen", "Mueller-Hinton", "Thayer-Martin", "Agar darah"], "a": "Sabouraud dextrose agar", "skdi": "4A", "e": "Tinea korporis dengan central healing disebabkan dermatofita yang dikultur pada Sabouraud dextrose agar. Lowenstein-Jensen untuk mikobakterium, Mueller-Hinton untuk uji kepekaan antibiotik, Thayer-Martin untuk Neisseria, agar darah untuk bakteri umum.", "n": "Kuis Pekan 3 no.1 / Aorta 19 no.97"},
+];
+window.QUESTIONS=QUESTIONS;</script>
+<script>
+(function(){
+"use strict";
+var QS = window.QUESTIONS || [];
+var TOTAL = QS.length;
+var EXAM_MINUTES = 150;
+var LS_KEY = "cbt_derma_v1";
+var app = document.getElementById("app");
+var toastEl = document.getElementById("toast");
+var toastTimer = null;
+
+var state = null;
+var tick = null;
+
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 1800);
+}
+function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+function shuffle(arr){ var a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+
+/* ---------- persistence ---------- */
+function save(){ if(!state) return; try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+function load(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(!raw) return null;
+    var s = JSON.parse(raw);
+    if(!s || s.total !== TOTAL || !s.order || s.order.length !== TOTAL) return null;
+    return s;
+  }catch(e){ return null; }
+}
+function clearSave(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
+
+/* ---------- state factory (always shuffled + practice) ---------- */
+function newState(){
+  var order = [];
+  for(var i=0;i<TOTAL;i++) order.push(i);
+  order = shuffle(order);
+  var optOrders = {};
+  for(var k=0;k<TOTAL;k++){
+    var n = QS[k].o.length;
+    var idx = []; for(var j=0;j<n;j++) idx.push(j);
+    optOrders[k] = shuffle(idx);
+  }
+  return {
+    total: TOTAL, order: order, optOrders: optOrders,
+    answers: {}, flags: {}, pos: 0,
+    remaining: EXAM_MINUTES*60,
+    started: false, finished: false,
+    practice: true, shuffleQ: true
+  };
+}
+
+/* ---------- timer ---------- */
+function startTimer(){
+  if(tick) return;
+  tick = setInterval(function(){
+    if(!state || state.finished){ return; }
+    state.remaining--;
+    if(state.remaining<=0){ state.remaining=0; updateClock(); finishExam(true); return; }
+    updateClock();
+    save();
+  },1000);
+}
+function fmt(sec){
+  var h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
+  function p(x){ return (x<10?"0":"")+x; }
+  return p(h)+":"+p(m)+":"+p(s);
+}
+function updateClock(){
+  var c=document.getElementById("clock");
+  if(!c) return;
+  c.textContent = fmt(state.remaining);
+  c.classList.remove("warn","danger");
+  if(state.remaining<=300) c.classList.add("danger");
+  else if(state.remaining<=900) c.classList.add("warn");
+}
+
+function curQi(){ return state.order[state.pos]; }
+
+/* ---------- exam screen ---------- */
+function renderExam(){
+  app.innerHTML = "\
+  <div class='topbar'>\
+    <div class='title'>Dermatologi &amp; Venereologi <small>Computer-Based Test \u00B7 "+TOTAL+" soal \u00B7 Mode Latihan</small></div>\
+    <div class='timer'>\
+      <div class='lbl'>Sisa<br>Waktu</div>\
+      <div class='clock' id='clock'>"+fmt(state.remaining)+"</div>\
+    </div>\
+  </div>\
+  <div class='wrap'>\
+    <div class='grid'>\
+      <div id='qpane'></div>\
+      <div class='side'>\
+        <h3>Navigasi Soal</h3>\
+        <div class='legend'>\
+          <span><i class='dot g'></i>Terjawab</span>\
+          <span><i class='dot o'></i>Ragu-ragu</span>\
+          <span><i class='dot a'></i>Kosong</span>\
+          <span><i class='dot c'></i>Aktif</span>\
+        </div>\
+        <div class='navgrid' id='navgrid'></div>\
+        <div class='summary' id='summary'></div>\
+        <div class='kbdhint'>\u2328 Gunakan tombol <b>\u2190</b> dan <b>\u2192</b> untuk berpindah soal, <b>1\u20135</b> untuk memilih jawaban, <b>F</b> untuk ragu-ragu.</div>\
+        <button class='btn btn-danger stopbtn' id='stopBtn'>HENTIKAN UJIAN</button>\
+      </div>\
+    </div>\
+  </div>";
+  document.getElementById("stopBtn").onclick=function(){
+    var ans=Object.keys(state.answers).length;
+    if(confirm("Hentikan ujian sekarang?\\n\\nTerjawab: "+ans+" dari "+TOTAL+" soal.\\nSetelah dihentikan, skor dan seluruh pembahasan akan ditampilkan.")){
+      finishExam(false);
+    }
+  };
+  updateClock();
+  renderQuestion();
+  renderNav();
+}
+
+function selectOption(displayIdx){
+  if(!state || state.finished) return;
+  var qi=curQi();
+  if(state.answers.hasOwnProperty(qi)) return; // already answered (practice locks)
+  var ord=state.optOrders[qi];
+  if(displayIdx<0 || displayIdx>=ord.length) return;
+  state.answers[qi]=ord[displayIdx];
+  if(!state.started && state.pos===0){ state.started=true; startTimer(); toast("\u23F1 Waktu dimulai!"); }
+  save(); renderQuestion(); renderNav();
+}
+function toggleFlag(){
+  if(!state) return;
+  var qi=curQi();
+  if(state.flags[qi]) delete state.flags[qi]; else state.flags[qi]=true;
+  save(); renderQuestion(); renderNav();
+}
+function gotoPos(p){
+  if(!state) return;
+  if(p<0||p>=TOTAL) return;
+  state.pos=p; save(); renderQuestion(); renderNav(); window.scrollTo(0,0);
+}
+
+function renderQuestion(){
+  var qi=curQi();
+  var q=QS[qi];
+  var ord=state.optOrders[qi];
+  var sel=state.answers.hasOwnProperty(qi)?state.answers[qi]:null;
+  var reveal = state.finished || (state.practice && sel!==null);
+  var correctOrig = q.o.indexOf(q.a);
+  var letters=["A","B","C","D","E"];
+  var html="<div class='card'>";
+  html+="<div class='qhead'><span class='qnum'>Soal "+(state.pos+1)+" / "+TOTAL+"</span>";
+  html+="<span class='chip'>"+esc(q.t)+"</span>";
+  html+="<span class='chip src'>\uD83D\uDCDA "+esc(q.n)+"</span>";
+  if(reveal) html+="<span class='chip skdi'>SKDI: "+esc(q.skdi)+"</span>";
+  html+="</div>";
+  html+="<div class='qstem'>"+esc(q.q)+"</div>";
+  html+="<div class='options'>";
+  for(var d=0; d<ord.length; d++){
+    var origIdx=ord[d];
+    var cls="option";
+    if(reveal){
+      if(origIdx===correctOrig) cls+=" correct";
+      else if(origIdx===sel) cls+=" wrong";
+    } else if(origIdx===sel){ cls+=" sel"; }
+    html+="<button class='"+cls+"' "+(reveal?"disabled":"")+" data-disp='"+d+"'>";
+    html+="<span class='key'>"+letters[d]+"</span><span class='txt'>"+esc(q.o[origIdx])+"</span></button>";
+  }
+  html+="</div>";
+  if(reveal){
+    var keyLetter=letters[ord.indexOf(correctOrig)];
+    html+="<div class='explain'>";
+    html+="<div class='keyline'><b>Kunci Jawaban: "+keyLetter+".</b> "+esc(q.a)+" &nbsp;\u00B7&nbsp; <b>Level SKDI:</b> "+esc(q.skdi)+" &nbsp;\u00B7&nbsp; <b>Sumber:</b> "+esc(q.n)+"</div>";
+    html+="<h4>Pembahasan</h4><div class='body'>"+esc(q.e)+"</div>";
+    html+="</div>";
+  }
+  var flagged=!!state.flags[qi];
+  html+="<div class='actionrow'>";
+  html+="<button class='flagbtn "+(flagged?"on":"")+"' id='flagBtn'>\u2691 "+(flagged?"Ditandai ragu-ragu":"Ragu-ragu")+"</button>";
+  html+="<div class='nav-btns'>";
+  html+="<button class='smallbtn' id='prevBtn' "+(state.pos===0?"disabled":"")+">\u2190 Sebelumnya</button>";
+  html+="<button class='smallbtn primary' id='nextBtn' "+(state.pos===TOTAL-1?"disabled":"")+">Berikutnya \u2192</button>";
+  html+="</div></div>";
+  html+="</div>";
+  document.getElementById("qpane").innerHTML=html;
+
+  if(!reveal){
+    document.querySelectorAll("#qpane .option").forEach(function(b){
+      b.onclick=function(){ selectOption(parseInt(b.getAttribute("data-disp"),10)); };
+    });
+  }
+  document.getElementById("flagBtn").onclick=toggleFlag;
+  var pv=document.getElementById("prevBtn"); if(pv) pv.onclick=function(){ gotoPos(state.pos-1); };
+  var nx=document.getElementById("nextBtn"); if(nx) nx.onclick=function(){ gotoPos(state.pos+1); };
+}
+
+function renderNav(){
+  var grid=document.getElementById("navgrid");
+  if(!grid) return;
+  var html="";
+  for(var p=0;p<TOTAL;p++){
+    var qi=state.order[p];
+    var cls="navcell";
+    if(state.answers.hasOwnProperty(qi)) cls+=" answered";
+    if(state.flags[qi]) cls+=" flagged flag-mark";
+    if(p===state.pos) cls+=" current";
+    html+="<button class='"+cls+"' data-pos='"+p+"'>"+(p+1)+"</button>";
+  }
+  grid.innerHTML=html;
+  grid.querySelectorAll(".navcell").forEach(function(c){
+    c.onclick=function(){ gotoPos(parseInt(c.getAttribute("data-pos"),10)); };
+  });
+  var ans=Object.keys(state.answers).length;
+  var fl=Object.keys(state.flags).length;
+  document.getElementById("summary").innerHTML="<div>Terjawab: <b>"+ans+"</b> / "+TOTAL+"</div><div>Ragu-ragu: <b>"+fl+"</b></div><div>Belum dijawab: <b>"+(TOTAL-ans)+"</b></div>";
+}
+
+/* ---------- finish + result ---------- */
+function finishExam(timeUp){
+  state.finished=true;
+  if(tick){ clearInterval(tick); tick=null; }
+  save();
+  renderResult(timeUp);
+}
+function computeScore(){
+  var correct=0, answered=0, byTopic={};
+  for(var qi=0; qi<TOTAL; qi++){
+    var q=QS[qi];
+    if(!byTopic[q.t]) byTopic[q.t]={c:0,t:0};
+    byTopic[q.t].t++;
+    if(state.answers.hasOwnProperty(qi)){
+      answered++;
+      if(state.answers[qi]===q.o.indexOf(q.a)){ correct++; byTopic[q.t].c++; }
+    }
+  }
+  return {correct:correct,answered:answered,byTopic:byTopic};
+}
+function renderResult(timeUp){
+  if(tick){ clearInterval(tick); tick=null; }
+  var r=computeScore();
+  var pct=TOTAL?Math.round(r.correct/TOTAL*100):0;
+  var ringColor = pct>=70 ? "linear-gradient(135deg,#16a34a,#22c55e)" : pct>=50 ? "linear-gradient(135deg,#f59e0b,#f97316)" : "linear-gradient(135deg,#dc2626,#ef4444)";
+  var topics=Object.keys(r.byTopic).sort();
+  var trows="";
+  topics.forEach(function(t){
+    var o=r.byTopic[t]; var tp=Math.round(o.c/o.t*100);
+    trows+="<div class='topic-row'><div style='flex:0 0 150px'>"+esc(t)+"</div><div class='bar'><i style='width:"+tp+"%'></i></div><div class='pct'>"+o.c+"/"+o.t+" ("+tp+"%)</div></div>";
+  });
+  app.innerHTML="\
+  <div class='wrap'>\
+    <div class='result-hero'>\
+      "+(timeUp?"<div style='color:#dc2626;font-weight:700;margin-bottom:8px'>\u23F0 Waktu habis \u2014 ujian otomatis dihentikan</div>":"")+"\
+      <h1 style='margin:0 0 4px'>Hasil Ujian</h1>\
+      <div style='color:#64748b;font-size:14px'>Dermatologi &amp; Venereologi</div>\
+      <div class='score-ring' style='background:"+ringColor+"'><b>"+pct+"%</b><span>Skor Akhir</span></div>\
+      <div class='result-stats'>\
+        <div class='rstat' style='color:#16a34a'><b>"+r.correct+"</b><span>Benar</span></div>\
+        <div class='rstat' style='color:#dc2626'><b>"+(r.answered-r.correct)+"</b><span>Salah</span></div>\
+        <div class='rstat' style='color:#64748b'><b>"+(TOTAL-r.answered)+"</b><span>Kosong</span></div>\
+        <div class='rstat'><b>"+TOTAL+"</b><span>Total</span></div>\
+      </div>\
+      <div class='topic-table'><h3 style='font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#64748b;margin-bottom:6px'>Sebaran per Topik</h3>"+trows+"</div>\
+      <div class='result-actions'>\
+        <button class='btn' id='reviewBtn'>\uD83D\uDCD6 Buka Semua Pembahasan</button>\
+        <button class='btn btn-ghost' id='restartBtn'>\uD83D\uDD04 Ulangi Ujian Baru</button>\
+      </div>\
+    </div>\
+  </div>";
+  document.getElementById("reviewBtn").onclick=function(){ state.pos=0; renderReview(); };
+  document.getElementById("restartBtn").onclick=function(){ clearSave(); state=newState(); save(); renderExam(); window.scrollTo(0,0); };
+}
+
+function renderReview(){
+  var letters=["A","B","C","D","E"];
+  var html="<div class='topbar'><div class='title'>Pembahasan Lengkap <small>"+TOTAL+" soal</small></div><button class='smallbtn primary' id='backTop'>\u2191 Kembali ke Skor</button></div><div class='wrap'>";
+  for(var p=0;p<TOTAL;p++){
+    var qi=state.order[p];
+    var q=QS[qi];
+    var ord=state.optOrders[qi];
+    var sel=state.answers.hasOwnProperty(qi)?state.answers[qi]:null;
+    var correctOrig=q.o.indexOf(q.a);
+    var statusTxt = sel===null ? "<span style='color:#64748b'>Tidak dijawab</span>" : (sel===correctOrig?"<span style='color:#16a34a;font-weight:700'>Benar</span>":"<span style='color:#dc2626;font-weight:700'>Salah</span>");
+    html+="<div class='card' style='margin-bottom:16px'>";
+    html+="<div class='qhead'><span class='qnum'>No. "+(p+1)+"</span><span class='chip'>"+esc(q.t)+"</span><span class='chip src'>\uD83D\uDCDA "+esc(q.n)+"</span><span class='chip skdi'>SKDI: "+esc(q.skdi)+"</span><span style='margin-left:auto;font-size:13px'>"+statusTxt+"</span></div>";
+    html+="<div class='qstem'>"+esc(q.q)+"</div><div class='options'>";
+    for(var d=0;d<ord.length;d++){
+      var origIdx=ord[d]; var cls="option";
+      if(origIdx===correctOrig) cls+=" correct"; else if(origIdx===sel) cls+=" wrong";
+      html+="<button class='"+cls+"' disabled><span class='key'>"+letters[d]+"</span><span class='txt'>"+esc(q.o[origIdx])+"</span></button>";
+    }
+    html+="</div>";
+    var keyLetter=letters[ord.indexOf(correctOrig)];
+    html+="<div class='explain'><div class='keyline'><b>Kunci Jawaban: "+keyLetter+".</b> "+esc(q.a)+" &nbsp;\u00B7&nbsp; <b>Level SKDI:</b> "+esc(q.skdi)+" &nbsp;\u00B7&nbsp; <b>Sumber:</b> "+esc(q.n)+"</div><h4>Pembahasan</h4><div class='body'>"+esc(q.e)+"</div></div>";
+    html+="</div>";
+  }
+  html+="<div style='text-align:center;padding:10px 0 40px'><button class='btn btn-ghost' id='restart2'>\uD83D\uDD04 Ulangi Ujian Baru</button></div></div>";
+  app.innerHTML=html;
+  document.getElementById("backTop").onclick=function(){ renderResult(false); window.scrollTo(0,0); };
+  document.getElementById("restart2").onclick=function(){ clearSave(); state=newState(); save(); renderExam(); window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+}
+
+/* ---------- keyboard navigation ---------- */
+document.addEventListener("keydown", function(ev){
+  if(!state || state.finished) return;
+  if(!document.getElementById("qpane")) return; // only on exam screen
+  var tag=(ev.target&&ev.target.tagName)?ev.target.tagName.toLowerCase():"";
+  if(tag==="input"||tag==="textarea"||tag==="select") return;
+  if(ev.key==="ArrowLeft"){ ev.preventDefault(); gotoPos(state.pos-1); }
+  else if(ev.key==="ArrowRight"){ ev.preventDefault(); gotoPos(state.pos+1); }
+  else if(ev.key>="1" && ev.key<="5"){ ev.preventDefault(); selectOption(parseInt(ev.key,10)-1); }
+  else if(ev.key==="f"||ev.key==="F"){ ev.preventDefault(); toggleFlag(); }
+});
+
+/* ---------- boot ---------- */
+var existing=load();
+if(existing){
+  state=existing;
+  if(state.finished){ renderResult(false); }
+  else { renderExam(); if(state.started) startTimer(); }
+} else {
+  state=newState();
+  save();
+  renderExam();
+}
+})();
+</script>
+</body>
+</html>
