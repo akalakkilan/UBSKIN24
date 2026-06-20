@@ -520,7 +520,7 @@ function selectOption(displayIdx){
   var ord=state.optOrders[qi];
   if(displayIdx<0 || displayIdx>=ord.length) return;
   state.answers[qi]=ord[displayIdx];
-  if(!state.started && state.pos===0){ state.started=true; startTimer(); toast("\u23F1 Waktu dimulai!"); }
+  if(!state.started){ state.started=true; startTimer(); toast("\u23F1 Waktu dimulai!"); }
   save(); renderQuestion(); renderNav();
 }
 function toggleFlag(){
